@@ -1,30 +1,43 @@
 
+import * as def from './def'
+export type AST = OpenBracketAST | FoldBracketPairAST | ListAST | TextAST;
 
-type AST = FoldBracketAST | FoldBracketPairAST | ListAST | TextAST;
-
-/**
- * 
+/** 
+ *  Represents a single instance of "$comment{{{" or "$comment}}}" where $comment represents 
+ *  a single-line comment token for a given language.
  */
-class FoldBracketAST {
+export class OpenBracketAST {
 
     length: number = 0
 
-    constructor(len: number) {
-        this.length = len;
+    constructor(language: string) {
+        this.length = def.comments[language].length + 3
     }
 }
 
-/** Describes a matching bracket pair and the node in between, e.g. `{...}` */
-class FoldBracketPairAST {
+export class CloseBracketAST {
+
+    length: number = 0
+
+    constructor(language: string) {
+        this.length = def.comments[language].length + 3
+    }    
+}
+
+/**
+ * Represents a pair of open/close fold markers: "$comment{{{ ... $comment}}}"
+ * 
+ */
+export class FoldBracketPairAST {
 
     length: number = 0;
-    opening_bracket: FoldBracketAST | null = null;
+    opening_bracket: OpenBracketAST | null = null;
     child: FoldBracketPairAST | ListAST | TextAST | null = null;
-    closing_bracket: FoldBracketAST | null = null;
+    closing_bracket: CloseBracketAST | null = null;
 
-    constructor(opening_bracket: FoldBracketAST, 
+    constructor(opening_bracket: OpenBracketAST, 
                 child: FoldBracketPairAST | ListAST | TextAST, 
-                closing_bracket: FoldBracketAST)
+                closing_bracket: CloseBracketAST)
     {
 
         this.length = opening_bracket.length + child.length + closing_bracket.length;
@@ -36,8 +49,10 @@ class FoldBracketPairAST {
     
 }
 
-/** Describes a list of bracket pairs or text nodes, e.g. `()...()` */
-class ListAST {
+/** 
+ * Describes a list of open/close fold marker pairs and text
+*/
+export class ListAST {
 
     length: number;
     items: Array<FoldBracketPairAST | TextAST> | null = null;
@@ -45,13 +60,27 @@ class ListAST {
     constructor( items: Array<FoldBracketPairAST | TextAST>)
     {
         this.items = items;
-        this.length = this.items.sum(item => item.length);
+        this.length = 0
+        this.items.forEach((elem, i) => {
+            this.length += elem.length
+        })        
     }
-
-    
 }
 
 /** Describes text that has no brackets in it. */
-class TextAST {
-    constructor(public length: number) {}
+export class TextAST {
+
+    length: number = 0;
+
+    constructor(length: number) 
+    {
+        this.length = length;
+    }
 }
+
+
+
+
+
+
+
