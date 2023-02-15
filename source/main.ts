@@ -6,14 +6,25 @@ function main() {
 
     var data_out = fs.readFileSync('assets/folds.c', 'utf-8');
     var data_out_lines = data_out.split('\n')
-    console.log(data_out_lines)
+    // console.log(data_out_lines)
 
     var lex: lexer.Lexer = new lexer.Lexer('c', data_out)
 
+    // for(var i = 0; i < data_out.length; ++i)
+    // {
+    //     if(data_out[i] == '\n')
+    //     {
+    //         console.log('%d  \\n', i);
+    //     }
+    //     else 
+    //     {
+    //         console.log('%d %s', i, data_out[i])
+    //     }
+        
+    // }
     // console.log(lex.next())
 
     while (true) {
-
 
         var token = lex.next()
         console.log('--------------------------------------------')

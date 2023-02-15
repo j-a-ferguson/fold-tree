@@ -44,12 +44,14 @@ export class Lexer {
         type: TokenType.EOI, 
         buf_position: [0, 0, 0], 
         len: 0   
-    }
+    }    
     comment: string = ''
     buffer: string = ''
     buffer_ptr: number = 0
     buffer_line: number = 0
     buffer_col: number = 0
+    
+    current_text: string = ''
 
     constructor(lang: string, buffer: string) {
         this.comment = def.comments[lang]
@@ -63,20 +65,20 @@ export class Lexer {
                                   buf_position: [0, 0, 0], 
                                   len: 0 };
 
-        if (!this.nextChar(0)) {
+        if (!this.nextChar(1)) {
             next_token = this.eoi
         }
         else 
         {
             var state: number = 0
             var found: boolean  = false
-            while(true)
+            while(this.buffer_ptr < this.buffer.length)
             {
                 switch(state)
                 {
                     case 0:
                     {
-                        var next_char = this.nextChar(0);
+                        var next_char = this.nextChar(0);   
                         switch(next_char)
                         {
                             case '/': 
@@ -103,7 +105,7 @@ export class Lexer {
                             {
                                 state = 5
                             }
-                            break;
+                            break;                            
                         }
                     }
                     break;
@@ -124,8 +126,8 @@ export class Lexer {
                             found = true;                            
                         }
                         else 
-                        {
-                            this.buffer_ptr += 1;
+                        {                            
+                            this.incrementByChar()
                             state = 0
                         }
                     }
@@ -149,7 +151,7 @@ export class Lexer {
                         }
                         else 
                         {
-                            this.buffer_ptr += 1;
+                            this.incrementByChar()
                             state = 0
                         }
                     }
@@ -173,7 +175,7 @@ export class Lexer {
                         }
                         else 
                         {
-                            this.buffer_ptr += 1;
+                            this.incrementByChar()                            
                             state = 0
                         }
                     }
@@ -191,13 +193,16 @@ export class Lexer {
                         }                        
                         found = true;
                     }
+                    break;
                     case 5:
-                    {                           
+                    {        
+                                                
                         this.incrementByChar()
                         state = 0
                     }
-                    
+                    break;                    
                 }
+
                 if(found) 
                 {
                     this.incrementByToken(next_token)
@@ -218,7 +223,9 @@ export class Lexer {
     }
 
     incrementByToken(token: Token) {
+
         this.buffer_ptr += token.len
+        
         if(token.type == TokenType.Newline) 
         {
             this.buffer_line += 1;
@@ -228,13 +235,10 @@ export class Lexer {
         {
             this.buffer_col += token.len
         }
-        
-        
-        
     }
     
     incrementByChar() {
         this.buffer_ptr += 1
         this.buffer_col += 1
-    }
+    }    
 }
