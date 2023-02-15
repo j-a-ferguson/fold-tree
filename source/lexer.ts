@@ -28,12 +28,12 @@ export interface TokenNode<T extends TokenType> {
 }
 
 type Token = TokenNode<TokenType.Comment> |
-             TokenNode<TokenType.OpenBracket> |
-             TokenNode<TokenType.CloseBracket> |
-             TokenNode<TokenType.Newline> |
-             TokenNode<TokenType.Text> |
-             TokenNode<TokenType.EOI> |
-             TokenNode<TokenType.Unknown>
+    TokenNode<TokenType.OpenBracket> |
+    TokenNode<TokenType.CloseBracket> |
+    TokenNode<TokenType.Newline> |
+    TokenNode<TokenType.Text> |
+    TokenNode<TokenType.EOI> |
+    TokenNode<TokenType.Unknown>
 
 /**
  * This class represents a lexer for our fold language
@@ -41,179 +41,194 @@ type Token = TokenNode<TokenType.Comment> |
 export class Lexer {
 
     eoi: TokenNode<TokenType.EOI> = {
-        type: TokenType.EOI, 
-        buf_position: [0, 0, 0], 
-        len: 0   
-    }    
+        type: TokenType.EOI,
+        buf_position: [0, 0, 0],
+        len: 0
+    }
     comment: string = ''
     buffer: string = ''
     buffer_ptr: number = 0
     buffer_line: number = 0
     buffer_col: number = 0
-    
+
     current_text: string = ''
+    token_stack: Array<Token> = []
 
     constructor(lang: string, buffer: string) {
         this.comment = def.comments[lang]
-        this.buffer = buffer;        
+        this.buffer = buffer;
     }
 
 
     next() {
 
-        var next_token: Token = { type: TokenType.Unknown, 
-                                  buf_position: [0, 0, 0], 
-                                  len: 0 };
+        var next_token: Token = {
+            type: TokenType.Unknown,
+            buf_position: [0, 0, 0],
+            len: 0
+        };
 
-        if (!this.nextChar(1)) {
-            next_token = this.eoi
+        var tmp_token = this.token_stack.pop()
+
+        if (tmp_token) {
+            next_token = tmp_token
+            this.incrementByToken(next_token)            
         }
-        else 
-        {
-            var state: number = 0
-            var found: boolean  = false
-            while(this.buffer_ptr < this.buffer.length)
-            {
-                switch(state)
-                {
-                    case 0:
-                    {
-                        var next_char = this.nextChar(0);   
-                        switch(next_char)
-                        {
-                            case '/': 
+        else {
+            if (!this.nextChar(1)) {
+                next_token = this.eoi
+            }
+            else {
+                var state: number = 0
+                var found: boolean = false
+                while (this.buffer_ptr < this.buffer.length) {
+                    switch (state) {
+                        case 0:
                             {
-                                state = 1
+                                var next_char = this.nextChar(0);
+                                switch (next_char) {
+                                    case '/':
+                                        {
+                                            state = 1
+                                        }
+                                        break;
+                                    case '\{':
+                                        {
+                                            state = 2
+                                        }
+                                        break;
+                                    case '\}':
+                                        {
+                                            state = 3
+                                        }
+                                        break;
+                                    case '\n':
+                                        {
+                                            state = 4
+                                        }
+                                        break;
+                                    default:
+                                        {
+                                            state = 5
+                                        }
+                                        break;
+                                }
                             }
                             break;
-                            case '\{':
+                        case 1:
                             {
-                                state = 2
+                                var peek = this.nextChar(1)
+                                if (peek == '/') {
+                                    next_token = {
+                                        type: TokenType.Comment,
+                                        buf_position: [
+                                            this.buffer_ptr,
+                                            this.buffer_line,
+                                            this.buffer_col
+                                        ],
+                                        len: 2
+                                    }
+                                    found = true;
+                                }
+                                else {
+                                    this.incrementByChar()
+                                    state = 0
+                                }
                             }
                             break;
-                            case '\}':
+                        case 2:
                             {
-                                state = 3
+                                var peek1 = this.nextChar(1)
+                                var peek2 = this.nextChar(2)
+                                if (peek1 == '\{' && peek2 == '\{') {
+                                    next_token = {
+                                        type: TokenType.OpenBracket,
+                                        buf_position: [
+                                            this.buffer_ptr,
+                                            this.buffer_line,
+                                            this.buffer_col
+                                        ],
+                                        len: 3
+                                    }
+                                    found = true;
+                                }
+                                else {
+                                    this.incrementByChar()
+                                    state = 0
+                                }
                             }
                             break;
-                            case '\n':
+                        case 3:
                             {
-                                state = 4
+                                var peek1 = this.nextChar(1)
+                                var peek2 = this.nextChar(2)
+                                if (peek1 == '\}' && peek2 == '\}') {
+                                    next_token = {
+                                        type: TokenType.CloseBracket,
+                                        buf_position: [
+                                            this.buffer_ptr,
+                                            this.buffer_line,
+                                            this.buffer_col
+                                        ],
+                                        len: 3
+                                    }
+                                    found = true;
+                                }
+                                else {
+                                    this.incrementByChar()
+                                    state = 0
+                                }
                             }
                             break;
-                            default: 
+                        case 4:
                             {
-                                state = 5
+                                next_token = {
+                                    type: TokenType.Newline,
+                                    buf_position: [
+                                        this.buffer_ptr,
+                                        this.buffer_line,
+                                        this.buffer_col
+                                    ],
+                                    len: 1
+                                }
+                                found = true;
                             }
-                            break;                            
-                        }
-                    }
-                    break;
-                    case 1:
-                    {
-                        var peek = this.nextChar(1)
-                        if(peek == '/')
-                        {
-                            next_token = {
-                                type: TokenType.Comment, 
-                                buf_position: [
-                                    this.buffer_ptr,
-                                    this.buffer_line, 
-                                    this.buffer_col
-                                ],
-                                len: 2
-                            }                            
-                            found = true;                            
-                        }
-                        else 
-                        {                            
-                            this.incrementByChar()
-                            state = 0
-                        }
-                    }
-                    break;
-                    case 2: 
-                    {
-                        var peek1 = this.nextChar(1)
-                        var peek2 = this.nextChar(2)
-                        if(peek1 == '\{' && peek2 == '\{')
-                        {
-                            next_token = {
-                                type: TokenType.OpenBracket, 
-                                buf_position: [
-                                    this.buffer_ptr,
-                                    this.buffer_line, 
-                                    this.buffer_col
-                                ],
-                                len: 3
-                            }                            
-                            found = true;                            
-                        }
-                        else 
-                        {
-                            this.incrementByChar()
-                            state = 0
-                        }
-                    }
-                    break;
-                    case 3: 
-                    {
-                        var peek1 = this.nextChar(1)
-                        var peek2 = this.nextChar(2)
-                        if(peek1 == '\}' && peek2 == '\}')
-                        {
-                            next_token = {
-                                type: TokenType.CloseBracket, 
-                                buf_position: [
-                                    this.buffer_ptr,
-                                    this.buffer_line, 
-                                    this.buffer_col
-                                ],
-                                len: 3
-                            }                            
-                            found = true;                            
-                        }
-                        else 
-                        {
-                            this.incrementByChar()                            
-                            state = 0
-                        }
-                    }
-                    break;
-                    case 4: 
-                    {
-                        next_token = {
-                            type: TokenType.Newline, 
-                            buf_position: [
-                                this.buffer_ptr,
-                                this.buffer_line, 
-                                this.buffer_col
-                            ],
-                            len: 1
-                        }                        
-                        found = true;
-                    }
-                    break;
-                    case 5:
-                    {        
-                                                
-                        this.incrementByChar()
-                        state = 0
-                    }
-                    break;                    
-                }
+                            break;
+                        case 5:
+                            {
 
-                if(found) 
-                {
-                    this.incrementByToken(next_token)
-                    break;
+                                this.incrementByChar()
+                                state = 0
+                            }
+                            break;
+
+                    }
+
+                    if (found) {
+                        
+                        if(this.current_text.length > 0)
+                        {
+                            this.token_stack.push(next_token)
+                            next_token = {
+                                type: TokenType.Text, 
+                                buf_position: [
+                                    this.buffer_ptr - this.current_text.length,
+                                    this.buffer_line, 
+                                    this.buffer_col - this.current_text.length
+                                ],
+                                len: this.current_text.length
+                            }
+                            this.current_text = ''
+                        }                        
+                        this.incrementByToken(next_token)
+                        break;
+                    }
+
                 }
-                
             }
         }
-
         return next_token
-    }
+    }    
 
     nextChar(idx: number): string | undefined {
 
@@ -224,21 +239,24 @@ export class Lexer {
 
     incrementByToken(token: Token) {
 
-        this.buffer_ptr += token.len
+        if(token.type != TokenType.Text)
+        {
+            this.buffer_ptr += token.len
+
+            if (token.type == TokenType.Newline) {
+                this.buffer_line += 1;
+                this.buffer_col = 0
+            }
+            else {
+                this.buffer_col += token.len
+            }
+        }
         
-        if(token.type == TokenType.Newline) 
-        {
-            this.buffer_line += 1;
-            this.buffer_col = 0
-        }
-        else 
-        {
-            this.buffer_col += token.len
-        }
     }
-    
+
     incrementByChar() {
+        this.current_text = this.current_text.concat(this.buffer[this.buffer_ptr])
         this.buffer_ptr += 1
-        this.buffer_col += 1
-    }    
+        this.buffer_col += 1        
+    }
 }
