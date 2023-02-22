@@ -1,86 +1,84 @@
 
-import * as def from './def'
-export type AST = OpenBracketAST | FoldBracketPairAST | ListAST | TextAST;
-
-/** 
- *  Represents a single instance of "$comment{{{" or "$comment}}}" where $comment represents 
- *  a single-line comment token for a given language.
- */
-export class OpenBracketAST {
-
-    length: number = 0
-
-    constructor(language: string) {
-        this.length = def.comments[language].length + 3
-    }
+export enum ASTType {
+    File = "File",
+    Fold = "Fold",
+    FoldOpen = "FoldOpen",
+    FoldClose = "FoldClose",
+    Text = "Text",
+    Textline = "TextLine",
 }
 
-export class CloseBracketAST {
-
-    length: number = 0
-
-    constructor(language: string) {
-        this.length = def.comments[language].length + 3
-    }    
+export interface ASTNode<T extends ASTType> {
+    type: T,
+    buf_position: [number, number, number]
+    len: number
 }
 
-/**
- * Represents a pair of open/close fold markers: "$comment{{{ ... $comment}}}"
- * 
- */
-export class FoldBracketPairAST {
+export class FileAST implements ASTNode<ASTType.File> {
+    type: ASTType.File = ASTType.File
+    buf_position: [number, number, number] = [0, 0, 0]
+    len: number = 0
+    children: Array<ASTNode<ASTType.Fold>> = []
 
-    length: number = 0;
-    opening_bracket: OpenBracketAST | null = null;
-    child: FoldBracketPairAST | ListAST | TextAST | null = null;
-    closing_bracket: CloseBracketAST | null = null;
 
-    constructor(opening_bracket: OpenBracketAST, 
-                child: FoldBracketPairAST | ListAST | TextAST, 
-                closing_bracket: CloseBracketAST)
-    {
-
-        this.length = opening_bracket.length + child.length + closing_bracket.length;
-        this.opening_bracket = opening_bracket;
-        this.child = child;
-        this.closing_bracket = closing_bracket;
-    }
-
-    
+    constructor() { }
 }
 
-/** 
- * Describes a list of open/close fold marker pairs and text
-*/
-export class ListAST {
+export class FoldAST implements ASTNode<ASTType.Fold>{
 
-    length: number;
-    items: Array<FoldBracketPairAST | TextAST> | null = null;
+    type: ASTType.Fold = ASTType.Fold
+    buf_position: [number, number, number] = [0, 0, 0]
+    len: number = 0
 
-    constructor( items: Array<FoldBracketPairAST | TextAST>)
-    {
-        this.items = items;
-        this.length = 0
-        this.items.forEach((elem, i) => {
-            this.length += elem.length
-        })        
-    }
+    fold_open: FoldOpenAST | null = null
+    fold_close: FoldCloseAST | null = null
+    fold: FoldAST | null = null
+    text: TextAST | null = null
+
+    constructor() { }
 }
 
-/** Describes text that has no brackets in it. */
-export class TextAST {
+export class FoldOpenAST implements ASTNode<ASTType.FoldOpen>{
 
-    length: number = 0;
+    type: ASTType.FoldOpen = ASTType.FoldOpen
+    buf_position: [number, number, number] = [0, 0, 0]
+    len: number = 0
 
-    constructor(length: number) 
-    {
-        this.length = length;
-    }
+    text: TextAST | null = null
+
+    constructor(){}
 }
 
 
 
+export class FoldCloseAST implements ASTNode<ASTType.FoldClose>{
+
+    type: ASTType.FoldClose = ASTType.FoldClose
+    buf_position: [number, number, number] = [0, 0, 0]
+    len: number = 0
+    has_newline: boolean = false
+    constructor(){}
+}
 
 
+export class TextAST implements ASTNode<ASTType.Text>{
 
+    type: ASTType.Text = ASTType.Text
+    buf_position: [number, number, number] = [0, 0, 0]
+    len: number = 0
+    text_lines: Array<TextlineAST> = []
 
+    constructor(){}
+}
+
+export class TextlineAST implements ASTNode<ASTType.Textline> {
+
+    type: ASTType.Textline = ASTType.Textline
+    buf_position: [number, number, number] = [0, 0, 0]
+    len: number = 0
+
+    value: string = ''
+    has_newline: boolean = false
+
+    constructor(){}
+}

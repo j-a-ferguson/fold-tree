@@ -27,8 +27,7 @@ function main() {
     while (true) {
 
         var token = lex.next()
-        console.log('--------------------------------------------')
-        console.log(token)
+        console.log('--------------------------------------------')        
 
         console.log(data_out.substring(token.buf_position[0],
             token.buf_position[0] + token.len))

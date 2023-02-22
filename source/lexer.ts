@@ -27,7 +27,7 @@ export interface TokenNode<T extends TokenType> {
     len: number
 }
 
-type Token = TokenNode<TokenType.Comment> |
+export type Token = TokenNode<TokenType.Comment> |
     TokenNode<TokenType.OpenBracket> |
     TokenNode<TokenType.CloseBracket> |
     TokenNode<TokenType.Newline> |
@@ -72,7 +72,7 @@ export class Lexer {
 
         if (tmp_token) {
             next_token = tmp_token
-            this.incrementByToken(next_token)            
+            this.incrementByToken(next_token)
         }
         else {
             if (!this.nextChar(1)) {
@@ -205,21 +205,20 @@ export class Lexer {
                     }
 
                     if (found) {
-                        
-                        if(this.current_text.length > 0)
-                        {
+
+                        if (this.current_text.length > 0) {
                             this.token_stack.push(next_token)
                             next_token = {
-                                type: TokenType.Text, 
+                                type: TokenType.Text,
                                 buf_position: [
                                     this.buffer_ptr - this.current_text.length,
-                                    this.buffer_line, 
+                                    this.buffer_line,
                                     this.buffer_col - this.current_text.length
                                 ],
                                 len: this.current_text.length
                             }
                             this.current_text = ''
-                        }                        
+                        }
                         this.incrementByToken(next_token)
                         break;
                     }
@@ -228,7 +227,7 @@ export class Lexer {
             }
         }
         return next_token
-    }    
+    }
 
     nextChar(idx: number): string | undefined {
 
@@ -239,8 +238,7 @@ export class Lexer {
 
     incrementByToken(token: Token) {
 
-        if(token.type != TokenType.Text)
-        {
+        if (token.type != TokenType.Text) {
             this.buffer_ptr += token.len
 
             if (token.type == TokenType.Newline) {
@@ -251,12 +249,12 @@ export class Lexer {
                 this.buffer_col += token.len
             }
         }
-        
+
     }
 
     incrementByChar() {
         this.current_text = this.current_text.concat(this.buffer[this.buffer_ptr])
         this.buffer_ptr += 1
-        this.buffer_col += 1        
+        this.buffer_col += 1
     }
 }

@@ -33,5 +33,12 @@ int fcn(double val)
     {
         double d = 1.0;
     }
+
+
+    if(a == 1)
+    {
+        int c = 4;
+    }
+    
     return a;
 }
