@@ -1,10 +1,9 @@
 import * as fs from 'fs'
-
 import * as lexer from './lexer'
 
 function main() {
 
-    var data_out = fs.readFileSync('assets/folds.c', 'utf-8');
+    var data_out = fs.readFileSync('assets/folds1.c', 'utf-8');
     var data_out_lines = data_out.split('\n')
     // console.log(data_out_lines)
 
@@ -26,8 +25,11 @@ function main() {
 
     while (true) {
 
+        var token_after = lex.peek()
         var token = lex.next()
         console.log('--------------------------------------------')        
+        
+        console.log(JSON.stringify(token))
 
         console.log(data_out.substring(token.buf_position[0],
             token.buf_position[0] + token.len))

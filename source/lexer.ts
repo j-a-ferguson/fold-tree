@@ -45,22 +45,50 @@ export class Lexer {
         buf_position: [0, 0, 0],
         len: 0
     }
-    comment: string = ''
-    buffer: string = ''
-    buffer_ptr: number = 0
-    buffer_line: number = 0
-    buffer_col: number = 0
+    private comment: string = ''
+    private buffer: string = ''
+    private buffer_ptr: number = 0
+    private buffer_line: number = 0
+    private buffer_col: number = 0
 
-    current_text: string = ''
-    token_stack: Array<Token> = []
+    private current_text: string = ''
+    private token_stack: Array<Token> = []
+
+    private token_queue: Array<Token> = []
 
     constructor(lang: string, buffer: string) {
         this.comment = def.comments[lang]
         this.buffer = buffer;
+
+        this.token_queue.push(this.nextInternal())
+        this.token_queue.push(this.nextInternal())
+
     }
 
 
     next() {
+
+        var out_token = this.token_queue.shift()
+        this.token_queue.push(this.nextInternal())
+        if(out_token){
+            return out_token
+        }
+        else {
+            throw new Error("Queue is empty")
+        }
+    }
+
+    peek() {
+        var out_token = this.token_queue[1]
+        if(out_token){
+            return out_token
+        }
+        else {
+            throw new Error("Queue is too short")
+        }
+    }
+
+    private nextInternal() {
 
         var next_token: Token = {
             type: TokenType.Unknown,

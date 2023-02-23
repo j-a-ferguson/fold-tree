@@ -21,7 +21,6 @@
     "transform": {
       ".(ts|tsx)": "ts-jest"
     },
-    "testRegex": "source/tests.ts",
     "moduleFileExtensions": ["ts", "tsx", "js"]
   }
 }
