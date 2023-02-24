@@ -21,7 +21,6 @@ test("lexerTest1", () => {
             var str2 = data_out_lines[token.buf_position[1]].substring(token.buf_position[2],
                 token.buf_position[2] + token.len)
 
-            console.log(`|${str1}|  |${str2}| ${token.type}`)
             expect(str1 == str2).toBe(true)
         }
 
