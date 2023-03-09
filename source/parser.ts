@@ -4,7 +4,13 @@ import * as ast from './ast'
 export class Parser {
 
     lex: lexer.Lexer
-    tok1: lexer.Token = {
+    tok_old: lexer.Token = {
+        type: lexer.TokenType.Unknown,
+        buf_position: [0, 0, 0],
+        len: 0
+    };
+
+    tok_current: lexer.Token = {
         type: lexer.TokenType.Unknown,
         buf_position: [0, 0, 0],
         len: 0
@@ -17,7 +23,7 @@ export class Parser {
     }
 
     advance() {
-        this.tok1 = this.lex.next()
+        this.tok_current = this.lex.next()
     }
 
 
@@ -28,14 +34,13 @@ export class Parser {
     consume(token_type: lexer.TokenType) {
 
         var quit: boolean = true
-        if (this.expect(this.tok1, token_type)) {
+        if (this.expect(this.tok_current, token_type)) {
+            this.tok_old = this.tok_current
             this.advance()
             quit = false
         }
         return quit
     }
-
-
 
     parse() {
 
@@ -46,28 +51,32 @@ export class Parser {
     parseFile() {
 
         var file_ast = new ast.FileAST()
-
         return file_ast
     }
 
     parseFold() {
-
+        var fold_ast = new ast.FoldAST()
+        return fold_ast
     }
 
     parseFoldOpen() {
-
+        var fold_open_ast = new ast.FoldOpenAST()
+        return fold_open_ast
     }
 
     parseFoldClose() {
-
+        var fold_close_ast = new ast.FoldCloseAST()
+        return fold_close_ast
     }
 
     parseText() {
-
+        var text_ast = new ast.TextAST()
+        return text_ast
     }
     
     parseTextline() {
-
+        var textline_ast = new ast.TextlineAST()
+        return textline_ast
     }
 
 }

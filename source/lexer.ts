@@ -45,6 +45,11 @@ export class Lexer {
         buf_position: [0, 0, 0],
         len: 0
     }
+    unknown: TokenNode<TokenType.Unknown> = {
+        type: TokenType.Unknown,
+        buf_position: [0, 0, 0],
+        len: 0 
+    }
     private comment: string = ''
     private buffer: string = ''
     private buffer_ptr: number = 0
@@ -90,12 +95,7 @@ export class Lexer {
 
     private nextInternal() {
 
-        var next_token: Token = {
-            type: TokenType.Unknown,
-            buf_position: [0, 0, 0],
-            len: 0
-        };
-
+        var next_token: Token = this.unknown
         var tmp_token = this.token_stack.pop()
 
         if (tmp_token) {
@@ -115,7 +115,7 @@ export class Lexer {
                             {
                                 var next_char = this.nextChar(0);
                                 switch (next_char) {
-                                    case '/':
+                                    case this.comment[0]:
                                         {
                                             state = 1
                                         }
@@ -145,8 +145,12 @@ export class Lexer {
                             break;
                         case 1:
                             {
-                                var peek = this.nextChar(1)
-                                if (peek == '/') {
+                                var match: boolean = true
+                                for(var i = 1; i < this.comment.length; ++i){
+                                    var peek = this.nextChar(i)
+                                    match &&= (peek == this.comment[i])
+                                }
+                                if (match) {
                                     next_token = {
                                         type: TokenType.Comment,
                                         buf_position: [
@@ -154,7 +158,7 @@ export class Lexer {
                                             this.buffer_line,
                                             this.buffer_col
                                         ],
-                                        len: 2
+                                        len: this.comment.length
                                     }
                                     found = true;
                                 }

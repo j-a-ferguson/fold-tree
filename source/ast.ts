@@ -1,3 +1,5 @@
+import * as lexer from './lexer'
+
 
 export enum ASTType {
     File = "File",
@@ -46,7 +48,8 @@ export class FoldOpenAST implements ASTNode<ASTType.FoldOpen>{
 
     text: TextAST | null = null
 
-    constructor(){}
+    constructor(){
+    }
 }
 
 
