@@ -1,9 +1,13 @@
 import * as fs from 'fs'
 import * as lexer from './lexer'
+import * as parser from './parser'
 
-function main() {
 
-    var data_out = fs.readFileSync('assets/textline.c', 'utf-8');
+
+
+function fcn1() {
+
+    var data_out = fs.readFileSync('assets/textlines.c', 'utf-8');
     var lex: lexer.Lexer = new lexer.Lexer('c', data_out)
 
 
@@ -22,6 +26,20 @@ function main() {
 
         if (token == lex.eoi) break;
     }
+
+}
+
+function fcn2() {
+
+    var data_out = fs.readFileSync('assets/textlines.c', 'utf-8');
+    var lex: lexer.Lexer = new lexer.Lexer('c', data_out)
+    var par: parser.Parser = new parser.Parser(lex)
+
+}
+
+
+function main() {
+
 
 }
 

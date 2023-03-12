@@ -22,13 +22,13 @@ export class Parser {
         this.lex = lex
     }
 
-    advance() {
-        this.tok_current = this.lex.next()
-    }
 
-
-    expect(token: lexer.Token, token_type: lexer.TokenType) {
-        return (token.type == token_type)
+    expect(token: lexer.Token, ...types: Array<lexer.TokenType>) {
+        var is_one_of = false
+        for(var i = 0; !is_one_of && i < types.length; ++i){
+            is_one_of = is_one_of || (token.type == types[i])
+        }
+        return is_one_of;
     }
 
     consume(token_type: lexer.TokenType) {
@@ -36,7 +36,7 @@ export class Parser {
         var quit: boolean = true
         if (this.expect(this.tok_current, token_type)) {
             this.tok_old = this.tok_current
-            this.advance()
+            this.tok_current = this.lex.next()
             quit = false
         }
         return quit
@@ -51,6 +51,13 @@ export class Parser {
     parseFile() {
 
         var file_ast = new ast.FileAST()
+
+        while(!this.expect(this.tok_current, lexer.TokenType.EOI))
+        {
+            switch(this.tok_current.type) {
+                case lexer.TokenType.Comment
+            }
+        }
         return file_ast
     }
 
@@ -75,6 +82,9 @@ export class Parser {
     }
     
     parseTextline() {
+        if(this.consume(lexer.TokenType.Text)) {
+
+        }
         var textline_ast = new ast.TextlineAST()
         return textline_ast
     }

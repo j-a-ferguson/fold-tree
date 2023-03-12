@@ -20,8 +20,7 @@ export class FileAST implements ASTNode<ASTType.File> {
     type: ASTType.File = ASTType.File
     buf_position: [number, number, number] = [0, 0, 0]
     len: number = 0
-    children: Array<ASTNode<ASTType.Fold>> = []
-
+    children: Array<ASTNode<ASTType.Fold> | ASTNode<ASTType.Text>> = []
 
     constructor() { }
 }
@@ -34,8 +33,7 @@ export class FoldAST implements ASTNode<ASTType.Fold>{
 
     fold_open: FoldOpenAST | null = null
     fold_close: FoldCloseAST | null = null
-    fold: FoldAST | null = null
-    text: TextAST | null = null
+    children: Array<ASTNode<ASTType.Fold> | ASTNode<ASTType.Text>> = []
 
     constructor() { }
 }

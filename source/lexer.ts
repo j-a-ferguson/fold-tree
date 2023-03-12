@@ -27,6 +27,7 @@ export interface TokenNode<T extends TokenType> {
     len: number
 }
 
+
 export type Token = TokenNode<TokenType.Comment> |
     TokenNode<TokenType.OpenBracket> |
     TokenNode<TokenType.CloseBracket> |
@@ -34,6 +35,7 @@ export type Token = TokenNode<TokenType.Comment> |
     TokenNode<TokenType.Text> |
     TokenNode<TokenType.EOI> |
     TokenNode<TokenType.Unknown>
+
 
 /**
  * This class represents a lexer for our fold language
@@ -256,7 +258,25 @@ export class Lexer {
                     }
 
                 }
+                
+                if(!found && this.current_text.length > 0) {
+                    next_token = {
+                        type: TokenType.Text,
+                        buf_position: [
+                            this.buffer_ptr - this.current_text.length,
+                            this.buffer_line,
+                            this.buffer_col - this.current_text.length
+                        ],
+                        len: this.current_text.length
+                    }
+                    this.current_text = ''
+                    this.incrementByToken(next_token)
+                }
             }
+        }
+
+        if(next_token == this.unknown) {
+            throw new Error("Unknown token detected")
         }
         return next_token
     }
