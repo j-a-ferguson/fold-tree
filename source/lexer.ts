@@ -5,7 +5,7 @@ export enum TokenType {
     OpenBracket = "OpenBracket", // matches regex "\{\{\{"
     CloseBracket = "CloseBracket", // matches regex "\}\}\}"
     Newline = "Newline", // matches regex "\n"
-    Text = "Text", // matches  regex "[^\n]" 
+    ID = "ID", // matches  regex "[a-zA-Z1-9\W]" 
     EOI = "EOI",
     Unknown = "Unknown"
 }
@@ -25,6 +25,7 @@ export interface TokenNode<T extends TokenType> {
     type: T
     buf_position: [number, number, number]
     len: number
+
 }
 
 
@@ -32,9 +33,18 @@ export type Token = TokenNode<TokenType.Comment> |
     TokenNode<TokenType.OpenBracket> |
     TokenNode<TokenType.CloseBracket> |
     TokenNode<TokenType.Newline> |
-    TokenNode<TokenType.Text> |
+    TokenNode<TokenType.ID> |
     TokenNode<TokenType.EOI> |
     TokenNode<TokenType.Unknown>
+
+
+export function errorString(token: Token): string {
+
+    var line = token.buf_position[1]
+    var col = token.buf_position[2]
+    var type = token.type
+    return `Unexpected token: ${type} at line ${line} and column ${col}`
+}
 
 
 /**
@@ -243,7 +253,7 @@ export class Lexer {
                         if (this.current_text.length > 0) {
                             this.token_stack.push(next_token)
                             next_token = {
-                                type: TokenType.Text,
+                                type: TokenType.ID,
                                 buf_position: [
                                     this.buffer_ptr - this.current_text.length,
                                     this.buffer_line,
@@ -261,7 +271,7 @@ export class Lexer {
                 
                 if(!found && this.current_text.length > 0) {
                     next_token = {
-                        type: TokenType.Text,
+                        type: TokenType.ID,
                         buf_position: [
                             this.buffer_ptr - this.current_text.length,
                             this.buffer_line,
@@ -290,7 +300,7 @@ export class Lexer {
 
     incrementByToken(token: Token) {
 
-        if (token.type != TokenType.Text) {
+        if (token.type != TokenType.ID) {
             this.buffer_ptr += token.len
 
             if (token.type == TokenType.Newline) {

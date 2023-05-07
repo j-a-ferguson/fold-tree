@@ -7,7 +7,7 @@ import * as parser from './parser'
 
 function fcn1() {
 
-    var data_out = fs.readFileSync('assets/textlines.c', 'utf-8');
+    var data_out = fs.readFileSync('assets/fold-open.c', 'utf-8');
     var lex: lexer.Lexer = new lexer.Lexer('c', data_out)
 
 
@@ -31,15 +31,21 @@ function fcn1() {
 
 function fcn2() {
 
-    var data_out = fs.readFileSync('assets/textlines.c', 'utf-8');
+    var data_out = fs.readFileSync('assets/fold-open.c', 'utf-8');
     var lex: lexer.Lexer = new lexer.Lexer('c', data_out)
     var par: parser.Parser = new parser.Parser(lex)
+
+    var ast = par.parseFoldOpen()
+    console.log(JSON.stringify(ast))
 
 }
 
 
 function main() {
 
+    fcn1()
+    console.log('-------------------------------------')
+    fcn2()
 
 }
 
