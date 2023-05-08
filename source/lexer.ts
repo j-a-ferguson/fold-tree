@@ -1,7 +1,6 @@
 import * as def from './def'
 
 export enum TokenType {
-    Comment = "Comment", // matches "//" for c-like languages etc
     OpenBracket = "OpenBracket", // matches regex "\{\{\{"
     CloseBracket = "CloseBracket", // matches regex "\}\}\}"
     Newline = "Newline", // matches regex "\n"
@@ -29,8 +28,7 @@ export interface TokenNode<T extends TokenType> {
 }
 
 
-export type Token = TokenNode<TokenType.Comment> |
-    TokenNode<TokenType.OpenBracket> |
+export type Token = TokenNode<TokenType.OpenBracket> |
     TokenNode<TokenType.CloseBracket> |
     TokenNode<TokenType.Newline> |
     TokenNode<TokenType.ID> |
@@ -132,24 +130,14 @@ export class Lexer {
                                             state = 1
                                         }
                                         break;
-                                    case '\{':
+                                    case '\n':
                                         {
                                             state = 2
                                         }
                                         break;
-                                    case '\}':
-                                        {
-                                            state = 3
-                                        }
-                                        break;
-                                    case '\n':
-                                        {
-                                            state = 4
-                                        }
-                                        break;
                                     default:
                                         {
-                                            state = 5
+                                            state = 3
                                         }
                                         break;
                                 }
@@ -157,74 +145,60 @@ export class Lexer {
                             break;
                         case 1:
                             {
+                                // determine if matches comment
                                 var match: boolean = true
-                                for(var i = 1; i < this.comment.length; ++i){
+                                for(var i = 1; match && i < this.comment.length; ++i){
                                     var peek = this.nextChar(i)
-                                    match &&= (peek == this.comment[i])
+                                    match = (peek == this.comment[i])
                                 }
+
+                                // if so check if matches "{{{" or "}}}"
                                 if (match) {
-                                    next_token = {
-                                        type: TokenType.Comment,
-                                        buf_position: [
-                                            this.buffer_ptr,
-                                            this.buffer_line,
-                                            this.buffer_col
-                                        ],
-                                        len: this.comment.length
+                                    var nc = this.comment.length
+                                    var peek1 = this.nextChar(nc)
+                                    var peek2 = this.nextChar(nc + 1)
+                                    var peek3 = this.nextChar(nc + 2)
+                                    if(peek1 == '\{' && peek2 == '\{' && peek3 == '\{')
+                                    {
+                                        next_token = {
+                                            type: TokenType.OpenBracket,
+                                            buf_position: [
+                                                this.buffer_ptr,
+                                                this.buffer_line,
+                                                this.buffer_col
+                                            ],
+                                            len: 5
+                                        }
+                                        found = true;
                                     }
-                                    found = true;
+                                    else if (peek1 == '\}' && peek2 == '\}' && peek3 == '\}')
+                                    {
+                                        next_token = {
+                                            type: TokenType.CloseBracket,
+                                            buf_position: [
+                                                this.buffer_ptr,
+                                                this.buffer_line,
+                                                this.buffer_col
+                                            ],
+                                            len: 5
+                                        }
+                                        found = true;
+                                    }
+                                    else 
+                                    {
+                                        this.incrementByChar()
+                                        state = 0
+                                    }
                                 }
-                                else {
+                                else 
+                                {
+
                                     this.incrementByChar()
                                     state = 0
                                 }
                             }
                             break;
                         case 2:
-                            {
-                                var peek1 = this.nextChar(1)
-                                var peek2 = this.nextChar(2)
-                                if (peek1 == '\{' && peek2 == '\{') {
-                                    next_token = {
-                                        type: TokenType.OpenBracket,
-                                        buf_position: [
-                                            this.buffer_ptr,
-                                            this.buffer_line,
-                                            this.buffer_col
-                                        ],
-                                        len: 3
-                                    }
-                                    found = true;
-                                }
-                                else {
-                                    this.incrementByChar()
-                                    state = 0
-                                }
-                            }
-                            break;
-                        case 3:
-                            {
-                                var peek1 = this.nextChar(1)
-                                var peek2 = this.nextChar(2)
-                                if (peek1 == '\}' && peek2 == '\}') {
-                                    next_token = {
-                                        type: TokenType.CloseBracket,
-                                        buf_position: [
-                                            this.buffer_ptr,
-                                            this.buffer_line,
-                                            this.buffer_col
-                                        ],
-                                        len: 3
-                                    }
-                                    found = true;
-                                }
-                                else {
-                                    this.incrementByChar()
-                                    state = 0
-                                }
-                            }
-                            break;
-                        case 4:
                             {
                                 next_token = {
                                     type: TokenType.Newline,
@@ -238,7 +212,7 @@ export class Lexer {
                                 found = true;
                             }
                             break;
-                        case 5:
+                        case 3:
                             {
 
                                 this.incrementByChar()

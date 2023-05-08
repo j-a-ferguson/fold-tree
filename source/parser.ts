@@ -84,12 +84,12 @@ export class Parser {
         fold_open_ast.buf_position = this.tok_current.buf_position
 
         console.log(this.tok_current)
-        console.log(this.expect(this.tok_current, lexer.TokenType.Comment))
+        // console.log(this.expect(this.tok_current, lexer.TokenType.Comment))
 
-        if(this.consume(lexer.TokenType.Comment))
-        {
-            throw Error(lexer.errorString(this.tok_current))
-        }
+        // if(this.consume(lexer.TokenType.Comment))
+        // {
+        //     throw Error(lexer.errorString(this.tok_current))
+        // }
 
         if(this.consume(lexer.TokenType.OpenBracket))
         {
