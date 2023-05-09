@@ -1,3 +1,3 @@
-// {{{ col: collection 1
+//{{{ This is a fold
     This is some text
 //}}}

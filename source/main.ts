@@ -7,7 +7,7 @@ import * as parser from './parser'
 
 function fcn1() {
 
-    var data_out = fs.readFileSync('assets/fold-open.c', 'utf-8');
+    var data_out = fs.readFileSync('assets/textline2.c', 'utf-8');
     var lex: lexer.Lexer = new lexer.Lexer('c', data_out)
 
 
@@ -31,11 +31,24 @@ function fcn1() {
 
 function fcn2() {
 
-    var data_out = fs.readFileSync('assets/fold-open.c', 'utf-8');
+    var data_out = fs.readFileSync('assets/textline2.c', 'utf-8');
     var lex: lexer.Lexer = new lexer.Lexer('c', data_out)
     var par: parser.Parser = new parser.Parser(lex)
 
-    var ast = par.parseFoldOpen()
+    var ast = par.parseText()
+    console.log(JSON.stringify(ast))
+
+}
+
+
+
+function fcn3() {
+
+    var data_out = fs.readFileSync('assets/textline2.c', 'utf-8');
+    var lex: lexer.Lexer = new lexer.Lexer('c', data_out)
+    var par: parser.Parser = new parser.Parser(lex)
+
+    var ast = par.parseText()
     console.log(JSON.stringify(ast))
 
 }
@@ -44,8 +57,9 @@ function fcn2() {
 function main() {
 
     fcn1()
-    // console.log('-------------------------------------')
-    // fcn2()
+    console.log('-------------------------------------')
+    fcn2()
+
 
 }
 

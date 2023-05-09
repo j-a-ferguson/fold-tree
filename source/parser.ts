@@ -5,6 +5,12 @@ export class Parser {
 
     lex: lexer.Lexer
 
+    tok_previous: lexer.Token = {
+        type: lexer.TokenType.Unknown,
+        buf_position: [0, 0, 0],
+        len: 0
+    }
+
     tok_current: lexer.Token = {
         type: lexer.TokenType.Unknown,
         buf_position: [0, 0, 0],
@@ -35,13 +41,14 @@ export class Parser {
 
     consume(token_type: lexer.TokenType) {
 
-        var quit: boolean = true 
+        var resume: boolean = false 
         if (this.tok_current.type == token_type) {
+            this.tok_previous = this.tok_current
             this.tok_current = this.lex.next()
             this.tok_lookahead = this.lex.peek()
-            quit = false
+            resume = true 
         }
-        return quit
+        return resume 
     }
 
     parse() {
@@ -119,12 +126,21 @@ export class Parser {
 
         var text_ast = new ast.TextAST()
 
-        if(this.expect(this.tok_current, lexer.TokenType.Newline))
-        {
-            this.consume(lexer.TokenType.Newline)
-            var text_ast2 = this.parseText()
-            text_ast.len += text_ast2.len + 1
+        if(this.consume(lexer.TokenType.ID)){
+
+            text_ast.buf_position = this.tok_previous.buf_position
+            text_ast.len = this.tok_previous.len
+
+            if(this.consume(lexer.TokenType.Newline))
+            {
+                var text_ast2 = this.parseText()
+                text_ast.len += text_ast2.len + 1
+            }
         }
+        else { // choose the empty production
+            text_ast.is_empty = true;
+        }
+
         return text_ast
     }
     

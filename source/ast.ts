@@ -56,12 +56,21 @@ export class FoldCloseAST implements ASTNode<ASTType.FoldClose>{
     constructor(){}
 }
 
-
+/**
+ * This represents a Text node in the AST and has the following
+ * BNF Grammar:
+ * ```
+ * text ::= ID NEWLINE text
+ * text ::= ID
+ * text ::= EPS 
+ * ```
+ */
 export class TextAST implements ASTNode<ASTType.Text>{
 
     type: ASTType.Text = ASTType.Text
     buf_position: [number, number, number] = [0, 0, 0]
     len: number = 0
+    is_empty: boolean = false
 
 
     constructor(){}
