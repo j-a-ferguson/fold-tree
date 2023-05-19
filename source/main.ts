@@ -2,12 +2,11 @@ import * as fs from 'fs'
 import * as lexer from './lexer'
 import * as parser from './parser'
 
-
-
+var file = 'assets/single-fold1.c'
 
 function fcn1() {
 
-    var data_out = fs.readFileSync('assets/textline2.c', 'utf-8');
+    var data_out = fs.readFileSync(file, 'utf-8');
     var lex: lexer.Lexer = new lexer.Lexer('c', data_out)
 
 
@@ -31,25 +30,12 @@ function fcn1() {
 
 function fcn2() {
 
-    var data_out = fs.readFileSync('assets/textline2.c', 'utf-8');
+    var data_out = fs.readFileSync(file, 'utf-8');
     var lex: lexer.Lexer = new lexer.Lexer('c', data_out)
     var par: parser.Parser = new parser.Parser(lex)
 
-    var ast = par.parseText()
-    console.log(JSON.stringify(ast))
-
-}
-
-
-
-function fcn3() {
-
-    var data_out = fs.readFileSync('assets/textline2.c', 'utf-8');
-    var lex: lexer.Lexer = new lexer.Lexer('c', data_out)
-    var par: parser.Parser = new parser.Parser(lex)
-
-    var ast = par.parseText()
-    console.log(JSON.stringify(ast))
+    var ast = par.parseFold()
+    console.log(ast)
 
 }
 

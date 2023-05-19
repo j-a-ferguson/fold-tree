@@ -30,10 +30,14 @@ export class FoldAST implements ASTNode<ASTType.Fold>{
     len: number = 0
 
     fold_open: FoldOpenAST | null = null
+    fold: FoldAST | null = null
     fold_close: FoldCloseAST | null = null
-    children: Array<ASTNode<ASTType.Fold> | ASTNode<ASTType.Text>> = []
+
+    is_text: boolean = false
+    text: TextAST | null = null
 
     constructor() { }
+
 }
 
 export class FoldOpenAST implements ASTNode<ASTType.FoldOpen>{

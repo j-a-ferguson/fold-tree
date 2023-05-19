@@ -113,7 +113,7 @@ export class Lexer {
             this.incrementByToken(next_token)
         }
         else {
-            if (!this.nextChar(1)) {
+            if (!this.nextChar(0)) {
                 next_token = this.eoi
             }
             else {
@@ -292,5 +292,12 @@ export class Lexer {
         this.current_text = this.current_text.concat(this.buffer[this.buffer_ptr])
         this.buffer_ptr += 1
         this.buffer_col += 1
+    }
+
+    getText(tok: Token): string {
+        var start = tok.buf_position[0]
+        var end = tok.buf_position[0] + tok.len
+        var text = this.buffer.substring(start, end)
+        return text
     }
 }
