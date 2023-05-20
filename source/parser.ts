@@ -71,9 +71,7 @@ export class Parser {
         {
             /** doc
              * This branch deals with the following production rule:
-             * ```
              * fold ::= fold_open fold fold_close
-             * ```
              */
             fold_ast.fold_open = this.parseFoldOpen()
             fold_ast.buf_position = fold_ast.fold_open.buf_position
@@ -90,7 +88,7 @@ export class Parser {
             fold_ast.text = this.parseText()
             fold_ast.is_text = true;
             fold_ast.buf_position = fold_ast.text.buf_position
-            fold_ast.len = fold_ast.len
+            fold_ast.len = fold_ast.text.len
         }
         else 
         {
@@ -151,7 +149,7 @@ export class Parser {
         }
         else 
         {
-            var err_str = "Error in parsing a close fold\n" + lexer.errorString(this.tok_previous)
+            var err_str = "Error in parsing a close fold\n" + lexer.errorString(this.tok_current)
             throw Error(err_str)
         }
         return fold_close_ast

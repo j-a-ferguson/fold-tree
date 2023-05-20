@@ -6,7 +6,9 @@
   "scripts": {
     "compile": "tsc -p ./",
     "lint": "eslint src --ext ts",
-    "test": "jest"
+    "test": "jest",
+    "doc": "typedoc", 
+    "main": "node build/main"
   },
   "author": "John Ferguson",
   "license": "ISC",
@@ -19,9 +21,9 @@
   },
   "jest": {
     "transform": {
-      ".(ts|tsx)": "ts-jest"
+      ".ts": "ts-jest"
     },
-    "moduleFileExtensions": ["js"]
+    "moduleFileExtensions": ["js"] 
   }
 }
 

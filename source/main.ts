@@ -35,7 +35,7 @@ function fcn2() {
     var par: parser.Parser = new parser.Parser(lex)
 
     var ast = par.parseFold()
-    console.log(ast)
+    console.log(JSON.stringify(ast, undefined, 2))
 
 }
 
