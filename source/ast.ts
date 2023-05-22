@@ -17,7 +17,7 @@ export class FileAST implements ASTNode<ASTType.File> {
     type: ASTType.File = ASTType.File
     buf_position: [number, number, number] = [0, 0, 0]
     len: number = 0
-    children: Array<ASTNode<ASTType.Fold> | ASTNode<ASTType.File>> = []
+    children: Array<ASTNode<ASTType.Fold>> = []
 
     constructor() { }
 
