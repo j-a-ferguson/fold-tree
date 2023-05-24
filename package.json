@@ -21,7 +21,7 @@
   },
   "jest": {
     "transform": {
-      ".ts": "ts-jest"
+      ".*\\.ts": "ts-jest"
     },
     "moduleFileExtensions": ["js"] 
   }

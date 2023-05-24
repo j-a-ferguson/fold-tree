@@ -1,4 +1,7 @@
-import * as def from './def'
+
+export const comments: Record<string, string>  = {c : "//", cpp : "//", python : "#", rust : "//"}
+export const open_fold_marker: string = "\{\{\{"
+export const close_fold_marker: string = "\}\}\}"
 
 export enum TokenType {
     OpenBracket = "OpenBracket", // matches regex "\{\{\{"
@@ -72,7 +75,7 @@ export class Lexer {
     private token_queue: Array<Token> = []
 
     constructor(lang: string, buffer: string) {
-        this.comment = def.comments[lang]
+        this.comment = comments[lang]
         this.buffer = buffer;
 
         this.token_queue.push(this.nextInternal())

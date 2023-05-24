@@ -47,7 +47,7 @@ export class Parser {
         return resume
     }
 
-    parse() {
+    parse() : ast.FileAST {
 
         var file_ast = this.parseFile()
         if (this.tok_current.type != lexer.TokenType.EOI) {
@@ -56,7 +56,7 @@ export class Parser {
         return file_ast
     }
 
-    parseFile() {
+    parseFile(): ast.FileAST {
 
         var file_ast = new ast.FileAST()
 
@@ -172,6 +172,8 @@ export class Parser {
 
             text_ast.buf_position = this.tok_previous.buf_position
             text_ast.len = 1
+            var text_ast2 = this.parseText()
+            text_ast.len += text_ast2.len
         }
         else {
             text_ast.is_empty = true
