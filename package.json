@@ -8,8 +8,8 @@
     "lint": "eslint src --ext ts",
     "test": "jest",
     "doc": "typedoc", 
-    "main": "node build/main"
-  },
+    "main": "node -r source-map-support/register build/main"
+  },  
   "author": "John Ferguson",
   "license": "ISC",
   "devDependencies": {

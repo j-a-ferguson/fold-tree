@@ -91,7 +91,8 @@ export class Parser {
             fold_ast.fold_close = this.parseFoldClose()
             fold_ast.len += fold_ast.fold_close.len
         }
-        else if (this.expect(lexer.TokenType.ID)) {
+        else if (this.expect(lexer.TokenType.ID) || 
+                 this.expect(lexer.TokenType.CloseBracket)) {
             /** doc
              * This branch deals with the following production:
              * fold ::= text
@@ -125,20 +126,32 @@ export class Parser {
         if (this.consume(lexer.TokenType.ID)) {
             fold_open_ast.len += this.tok_previous.len
             fold_open_ast.text = this.lex.getText(this.tok_previous)
-        }
 
-        if (this.consume(lexer.TokenType.Newline)) {
+            if (this.consume(lexer.TokenType.Newline)) {
+                fold_open_ast.len += this.tok_previous.len
+            }
+            else {
+                var err_str = 'Error in parsing open fold\n' + lexer.errorString(this.tok_previous)
+                throw Error(err_str)
+            }
+        }
+        else if(this.consume(lexer.TokenType.Newline))
+        {
+
             fold_open_ast.len += this.tok_previous.len
         }
-        else {
+        else
+        {
             var err_str = 'Error in parsing open fold\n' + lexer.errorString(this.tok_previous)
             throw Error(err_str)
         }
+
 
         return fold_open_ast
     }
 
     parseFoldClose(): ast.FoldCloseAST {
+
         var fold_close_ast = new ast.FoldCloseAST()
 
         if (this.consume(lexer.TokenType.CloseBracket)) {
@@ -176,6 +189,7 @@ export class Parser {
             text_ast.len += text_ast2.len
         }
         else {
+            text_ast.buf_position = this.tok_previous.buf_position
             text_ast.is_empty = true
         }
 

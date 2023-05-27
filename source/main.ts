@@ -2,7 +2,7 @@ import * as fs from 'fs'
 import * as lexer from './lexer'
 import * as parser from './parser'
 
-var file = 'assets/file.c'
+var file = 'assets/nested-fold1.c'
 
 function fcn1() {
 
@@ -35,7 +35,7 @@ function fcn2() {
     var par: parser.Parser = new parser.Parser(lex)
 
     var ast = par.parseFile()
-    console.log(JSON.stringify(ast, undefined, 2))
+    console.log(JSON.stringify(ast, undefined, 4))
 
 }
 
