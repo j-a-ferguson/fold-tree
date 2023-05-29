@@ -1,7 +1,8 @@
 import * as fs from 'fs'
 import * as lexer from './lexer'
+import * as parser from './parser'
 
-var file = 'assets/nested-fold1.c'
+var file = 'assets/text3.c'
 
 function fcn1() {
 
@@ -19,23 +20,23 @@ function fcn1() {
 
 }
 
-// function fcn2() {
+function fcn2() {
 
-//     var data_out = fs.readFileSync(file, 'utf-8');
-//     var lex: lexer.Lexer = new lexer.Lexer('c', data_out)
-//     var par: parser.Parser = new parser.Parser(lex)
+    var data_out = fs.readFileSync(file, 'utf-8');
+    var lex: lexer.Lexer = new lexer.Lexer('c', data_out)
+    var par: parser.Parser = new parser.Parser(lex)
 
-//     var ast = par.parseFile()
-//     console.log(JSON.stringify(ast, undefined, 4))
+    var ast = par.parseText()
+    console.log(JSON.stringify(ast, undefined, 4))
 
-// }
+}
 
 
 function main() {
 
-    fcn1()
+    // fcn1()
     console.log('-------------------------------------')
-
+    fcn2()
 
 }
 

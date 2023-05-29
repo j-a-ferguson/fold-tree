@@ -1,3 +1,5 @@
+import { SourcePos } from "./utils"
+
 const COMMENTS: Record<string, string> = { c: "//", cpp: "//", python: "#", rust: "//" }
 const OPEN_FOLD_MARKER: string = "\{\{\{"
 const CLOSE_FOLD_MARKER: string = "\}\}\}"
@@ -8,19 +10,6 @@ export enum TokenType {
     Textline = "Textline", // matches a non bracket line of text
     EOI = "EOI",
     Unknown = "Unknown"
-}
-
-export class SourcePos {
-
-    constructor(public buffer: string,
-        public offset: number = 0,
-        public len: number = 0,
-        public line: number = 0,
-        public col: number = 0) { }
-
-    text() {
-        return this.buffer?.substring(this.offset, this.offset + this.len)
-    }
 }
 
 export class Token {
@@ -91,7 +80,6 @@ export class Lexer {
 
             let match1 = ob_regex.test(line)
             let match2 = cb_regex.test(line)
-            console.log(`${match1} . ${match2}`)
 
             if (match1) {
                 // if the line matches the open bracket regex
@@ -105,6 +93,7 @@ export class Lexer {
             }
             else {
                 // if the line matches neither bracker regex
+                src_pos.len += 1
                 let new_token = new Token(TokenType.Textline, src_pos)
                 this.tokens.push(new_token)
             }

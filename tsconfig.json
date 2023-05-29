@@ -7,10 +7,16 @@
         "strict": true,
         "rootDir": "source"        
     },    
-    "include": ["source/lexer.ts", "source/main.ts"],
+    "include": ["source/lexer.ts", 
+                "source/ast.ts",
+                "source/utils.ts",
+                "source/parser.ts",
+                "source/main.ts"],
     "typedocOptions": {
         "entryPoints": [
             "source/lexer.ts", 
+            "source/utils.ts",
+            "source/ast.ts"
         ], 
         "out": "docs"
     }
