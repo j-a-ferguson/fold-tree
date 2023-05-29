@@ -1,50 +1,40 @@
 import * as fs from 'fs'
 import * as lexer from './lexer'
-import * as parser from './parser'
 
 var file = 'assets/nested-fold1.c'
 
 function fcn1() {
 
-    var data_out = fs.readFileSync(file, 'utf-8');
-    var lex: lexer.Lexer = new lexer.Lexer('c', data_out)
-
+    
+    let data_out = fs.readFileSync(file, 'utf-8');
+    let lex = new lexer.Lexer("c", data_out)
 
     while (true) {
+        let token = lex.next()
+        console.log(token)
+        console.log(token.src_pos.text())
 
-        var token = lex.next()
-
-        if (token.type != lexer.TokenType.Newline) {
-
-            var str1 = data_out.substring(token.buf_position[0],
-                token.buf_position[0] + token.len)
-
-        }
-
-        console.log(JSON.stringify(token))
-
-        if (token == lex.eoi) break;
+        if(token.isOfType(lexer.TokenType.EOI)) break
     }
 
 }
 
-function fcn2() {
+// function fcn2() {
 
-    var data_out = fs.readFileSync(file, 'utf-8');
-    var lex: lexer.Lexer = new lexer.Lexer('c', data_out)
-    var par: parser.Parser = new parser.Parser(lex)
+//     var data_out = fs.readFileSync(file, 'utf-8');
+//     var lex: lexer.Lexer = new lexer.Lexer('c', data_out)
+//     var par: parser.Parser = new parser.Parser(lex)
 
-    var ast = par.parseFile()
-    console.log(JSON.stringify(ast, undefined, 4))
+//     var ast = par.parseFile()
+//     console.log(JSON.stringify(ast, undefined, 4))
 
-}
+// }
 
 
 function main() {
 
     fcn1()
     console.log('-------------------------------------')
-    fcn2()
 
 
 }
