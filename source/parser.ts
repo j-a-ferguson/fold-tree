@@ -6,9 +6,9 @@ export class Parser {
     lex: Lexer
     tok_current: Token
 
-    constructor(lex: Lexer) {
-        this.lex = lex
-        this.tok_current = lex.next()
+    constructor(lang: string, buffer: string) {
+        this.lex = new Lexer(lang, buffer)
+        this.tok_current = this.lex.next()
     }
 
 
@@ -29,6 +29,11 @@ export class Parser {
             text_ast.src_pos.len = 0
         }
         return text_ast
+    }
+
+    parseFold(): FoldAst {
+
+        let fold_ast = new FoldAst
     }
 
     private expect(type: TokenType): boolean {

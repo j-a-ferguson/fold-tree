@@ -38,9 +38,6 @@ export class Lexer {
     private close_bracket_regex: string = ""
 
     private buffer: string = ""
-    private buffer_ptr: number = 0
-    private buffer_line: number = 0
-    private line_len: number = 0
 
     private tokens: Array<Token> = []
     private cur_tok_idx: number = 0
@@ -73,10 +70,17 @@ export class Lexer {
 
         let ob_regex = new RegExp(this.open_bracket_regex)
         let cb_regex = new RegExp(this.close_bracket_regex)
-        for (let line of this.buffer.split('\n')) {
+
+        let lines = this.buffer.split('\n')
+
+        let buffer_ptr = 0
+
+        for (const [idx, line] of lines.entries()) {
             
-            this.line_len = line.length
-            let src_pos = this.getSourcePos()
+            let line_len = line.length + 1
+            if(idx == (lines.length-1)) --line_len
+
+            let src_pos = new SourcePos(this.buffer, buffer_ptr, line_len, idx, 0)
 
             let match1 = ob_regex.test(line)
             let match2 = cb_regex.test(line)
@@ -93,26 +97,15 @@ export class Lexer {
             }
             else {
                 // if the line matches neither bracker regex
-                src_pos.len += 1
                 let new_token = new Token(TokenType.Textline, src_pos)
                 this.tokens.push(new_token)
             }
 
-            ++this.buffer_line
             // the plus one is for the newline character
-            this.buffer_ptr += (this.line_len + 1)
+            buffer_ptr += line_len
         }
 
-        let src_pos = this.getSourcePos()
+        let src_pos = new SourcePos(this.buffer, buffer_ptr, 0, lines.length, 0)
         this.tokens.push(new Token(TokenType.EOI, src_pos))
-    }
-
-    private getSourcePos(): SourcePos {
-        let src_pos = new SourcePos(this.buffer,
-            this.buffer_ptr,
-            this.line_len,
-            this.buffer_line, 
-            0)
-        return src_pos
     }
 }

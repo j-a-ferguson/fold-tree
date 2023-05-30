@@ -1,6 +1,6 @@
 {
     "compilerOptions": {
-        "target": "ES5",
+        "target": "ES2022",
         "module": "CommonJS",
         "sourceMap": true, 
         "outDir": "build",
@@ -11,6 +11,7 @@
                 "source/ast.ts",
                 "source/utils.ts",
                 "source/parser.ts",
+                "source/parser.test.ts",
                 "source/main.ts"],
     "typedocOptions": {
         "entryPoints": [
