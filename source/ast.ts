@@ -1,16 +1,34 @@
 import { SourcePos } from "./utils"
+import {Token} from "./lexer"
+
+export enum  ASTType {
+    Base = "Base", 
+    File = "File", 
+    Fold = "Fold", 
+    Text = "Text"
+}
 
 export class BaseAst {
+    readonly type: ASTType = ASTType.Base
     src_pos: SourcePos = new SourcePos("", 0, 0, 0, 0)
+
+    assignSourcePos(tok: Token) : void {
+        this.src_pos = Object.assign({}, tok.src_pos)
+    }
+
+    incrementLength(len: number): void {
+        this.src_pos.len += len
+    }
 }
 
 export class FileAst extends BaseAst {
-
+    readonly type: ASTType = ASTType.File
     children: Array<FoldAst | TextAst> = []
 } 
 
 export class FoldAst extends BaseAst {
 
+    readonly type: ASTType = ASTType.Fold
     header_text: string = ""
     indent: number = 0
     children: Array<FoldAst | TextAst> = []
@@ -18,6 +36,7 @@ export class FoldAst extends BaseAst {
 
 export class TextAst extends BaseAst {
 
+    readonly type: ASTType = ASTType.Text
     is_empty: boolean = false
 }
 

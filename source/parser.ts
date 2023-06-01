@@ -17,27 +17,71 @@ export class Parser {
         let text_ast = new TextAst()
 
         if(this.expect(TokenType.Textline)) {
-            text_ast.src_pos = Object.assign({}, this.tok_current.src_pos)
+            text_ast.assignSourcePos(this.tok_current)
             this.advance()
             let text_ast2 : TextAst = this.parseText()
-            text_ast.src_pos.len += text_ast2.src_pos.len
+            text_ast.incrementLength(text_ast2.src_pos.len)
         }
         else 
         {
             text_ast.is_empty = true
-            text_ast.src_pos = Object.assign({}, this.tok_current.src_pos)
-            text_ast.src_pos.len = 0
+            text_ast.assignSourcePos(this.tok_current)
         }
         return text_ast
     }
 
-    parseFold(): FoldAst {
+    parseFold(): FoldAst | TextAst {
 
-        let fold_ast = new FoldAst
+
+        if(this.expect(TokenType.OpenBracket)) {
+            let fold_ast = new FoldAst()
+            this.advance()
+            let file_ast = this.parseFile()
+            if(this.expect(TokenType.CloseBracket))
+            {
+                this.advance()
+                fold_ast.children = file_ast.children
+            }
+            else 
+            {
+                throw Error(this.tok_current.errorString())
+            }
+            return fold_ast
+        }
+        else if(this.expect(TokenType.Textline)) 
+        {
+            let text_ast = this.parseText()
+            return text_ast
+        }
+        else 
+        {
+            throw new Error(this.tok_current.errorString())
+        }
     }
 
-    private expect(type: TokenType): boolean {
-        return this.tok_current.isOfType(type)
+
+    parseFile(): FileAst {
+
+        let file_ast = new FileAst()
+        while(!this.expect(TokenType.EOI, TokenType.CloseBracket))
+        {
+            let fold_ast2 = this.parseFold()
+            file_ast.children.push(fold_ast2)
+        }
+        return file_ast
+    }
+
+    parse(): FileAst {
+
+        let file_ast = this.parseFile()
+        if(!this.expect(TokenType.EOI)) {
+            throw new Error(this.tok_current.errorString())
+        }
+        return file_ast
+    }
+
+    private expect(...types: TokenType[]): boolean {
+        return this.tok_current.isOfType(...types)
     }
     private advance() {
         this.tok_current = this.lex.next()

@@ -2,7 +2,7 @@ import * as fs from 'fs'
 import * as lexer from './lexer'
 import * as parser from './parser'
 
-var file = 'assets/text2.c'
+var file = 'assets/single-fold1.c'
 
 function fcn1() {
 
@@ -25,7 +25,7 @@ function fcn2() {
     var data_out = fs.readFileSync(file, 'utf-8');
     var par: parser.Parser = new parser.Parser('c', data_out)
 
-    var ast = par.parseText()
+    var ast = par.parse()
     console.log(JSON.stringify(ast, undefined, 4))
 
 }
@@ -34,7 +34,7 @@ function fcn2() {
 function main() {
 
     // fcn1()
-    console.log('-------------------------------------')
+    // console.log('-------------------------------------')
     fcn2()
 
 }
