@@ -10,4 +10,8 @@ export class SourcePos {
     text() {
         return this.buffer?.substring(this.offset, this.offset + this.len);
     }
+
+    get end() : number {
+        return this.offset + this.len
+    }
 }

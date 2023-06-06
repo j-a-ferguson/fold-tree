@@ -12,13 +12,7 @@ export class BaseAst {
     readonly type: ASTType = ASTType.Base
     src_pos: SourcePos = new SourcePos("", 0, 0, 0, 0)
 
-    assignSourcePos(tok: Token) : void {
-        this.src_pos = Object.assign({}, tok.src_pos)
-    }
 
-    incrementLength(len: number): void {
-        this.src_pos.len += len
-    }
 }
 
 export class FileAst extends BaseAst {

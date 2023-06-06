@@ -1,6 +1,7 @@
 
 import * as fs from 'fs'
 import * as parser from './parser'
+import * as ast from './ast'
 
 
 describe("Tests for exercising the parseText function", () => {
@@ -9,7 +10,7 @@ describe("Tests for exercising the parseText function", () => {
 
         files.forEach(file => {
             let json = fs.readFileSync(`assets/${file}.json`, "utf-8")
-            let correct_object = JSON.parse(json)
+            let correct_object = Object.assign(new ast.TextAst(), JSON.parse(json))
 
             let text: string = fs.readFileSync(`assets/${file}.c`, 'utf-8')
             let par = new parser.Parser('c', text)
