@@ -35,8 +35,10 @@ export class Parser {
 
         if(this.expect(TokenType.OpenBracket)) {
             let fold_ast = new FoldAst()
+            fold_ast.assignSourcePos(this.tok_current)
             this.advance()
             let file_ast = this.parseFile()
+            fold_ast.incrementLength(file_ast.src_pos.len)
             if(this.expect(TokenType.CloseBracket))
             {
                 this.advance()
