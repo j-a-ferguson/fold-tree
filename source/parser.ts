@@ -40,6 +40,7 @@ export class Parser {
 
             let fold_ast = new FoldAst()
             fold_ast.src_pos = Object.assign({}, this.tok_current.src_pos)
+            fold_ast.setHeaderText(this.tok_current)
 
             this.advance()
 

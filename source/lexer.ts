@@ -1,8 +1,8 @@
 import { SourcePos } from "./utils"
 
 const COMMENTS: Record<string, string> = { c: "//", cpp: "//", python: "#", rust: "//" }
-const OPEN_FOLD_MARKER: string = "\{\{\{"
-const CLOSE_FOLD_MARKER: string = "\}\}\}"
+export const OPEN_FOLD_MARKER: string = "\{\{\{"
+export const CLOSE_FOLD_MARKER: string = "\}\}\}"
 
 export enum TokenType {
     OpenBracket = "OpenBracket", // matches open bracket regex"
