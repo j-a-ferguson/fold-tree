@@ -1,0 +1,203 @@
+{
+  "type": "File",
+  "src_pos": {
+    "buffer": "\n// single fold\n//{{{ fold with comment\nHello this is some text\n//}}}\n\n// This is a \n// text node\n// here\n// nested folds\n//{{{ col: collection 1 \n\n\n    //{{{ col: collection 2\n        \n    //}}}\n\n    //{{{ col: collection 3\n\n        //{{{ col: collection 4\n\n        //}}}\n\n    //}}}\n\n//}}}\n\nint fcn(double val)\n{\n    int a = 1;\n    int b = 2;\n    {\n        double d = 1.0;\n    }\n\n\n    if(a == 1)\n    {\n        int c = 4;\n    }\n    \n    return a;\n}",
+    "offset": 0,
+    "len": 448,
+    "line": 0,
+    "col": 0
+  },
+  "children": [
+    {
+      "type": "Text",
+      "src_pos": {
+        "buffer": "\n// single fold\n//{{{ fold with comment\nHello this is some text\n//}}}\n\n// This is a \n// text node\n// here\n// nested folds\n//{{{ col: collection 1 \n\n\n    //{{{ col: collection 2\n        \n    //}}}\n\n    //{{{ col: collection 3\n\n        //{{{ col: collection 4\n\n        //}}}\n\n    //}}}\n\n//}}}\n\nint fcn(double val)\n{\n    int a = 1;\n    int b = 2;\n    {\n        double d = 1.0;\n    }\n\n\n    if(a == 1)\n    {\n        int c = 4;\n    }\n    \n    return a;\n}",
+        "offset": 0,
+        "len": 16,
+        "line": 0,
+        "col": 0
+      },
+      "is_empty": false
+    },
+    {
+      "type": "Fold",
+      "src_pos": {
+        "buffer": "\n// single fold\n//{{{ fold with comment\nHello this is some text\n//}}}\n\n// This is a \n// text node\n// here\n// nested folds\n//{{{ col: collection 1 \n\n\n    //{{{ col: collection 2\n        \n    //}}}\n\n    //{{{ col: collection 3\n\n        //{{{ col: collection 4\n\n        //}}}\n\n    //}}}\n\n//}}}\n\nint fcn(double val)\n{\n    int a = 1;\n    int b = 2;\n    {\n        double d = 1.0;\n    }\n\n\n    if(a == 1)\n    {\n        int c = 4;\n    }\n    \n    return a;\n}",
+        "offset": 16,
+        "len": 54,
+        "line": 2,
+        "col": 0
+      },
+      "header_text": " fold with comment",
+      "indent": 0,
+      "children": [
+        {
+          "type": "Text",
+          "src_pos": {
+            "buffer": "\n// single fold\n//{{{ fold with comment\nHello this is some text\n//}}}\n\n// This is a \n// text node\n// here\n// nested folds\n//{{{ col: collection 1 \n\n\n    //{{{ col: collection 2\n        \n    //}}}\n\n    //{{{ col: collection 3\n\n        //{{{ col: collection 4\n\n        //}}}\n\n    //}}}\n\n//}}}\n\nint fcn(double val)\n{\n    int a = 1;\n    int b = 2;\n    {\n        double d = 1.0;\n    }\n\n\n    if(a == 1)\n    {\n        int c = 4;\n    }\n    \n    return a;\n}",
+            "offset": 40,
+            "len": 24,
+            "line": 3,
+            "col": 0
+          },
+          "is_empty": false
+        }
+      ]
+    },
+    {
+      "type": "Text",
+      "src_pos": {
+        "buffer": "\n// single fold\n//{{{ fold with comment\nHello this is some text\n//}}}\n\n// This is a \n// text node\n// here\n// nested folds\n//{{{ col: collection 1 \n\n\n    //{{{ col: collection 2\n        \n    //}}}\n\n    //{{{ col: collection 3\n\n        //{{{ col: collection 4\n\n        //}}}\n\n    //}}}\n\n//}}}\n\nint fcn(double val)\n{\n    int a = 1;\n    int b = 2;\n    {\n        double d = 1.0;\n    }\n\n\n    if(a == 1)\n    {\n        int c = 4;\n    }\n    \n    return a;\n}",
+        "offset": 70,
+        "len": 52,
+        "line": 5,
+        "col": 0
+      },
+      "is_empty": false
+    },
+    {
+      "type": "Fold",
+      "src_pos": {
+        "buffer": "\n// single fold\n//{{{ fold with comment\nHello this is some text\n//}}}\n\n// This is a \n// text node\n// here\n// nested folds\n//{{{ col: collection 1 \n\n\n    //{{{ col: collection 2\n        \n    //}}}\n\n    //{{{ col: collection 3\n\n        //{{{ col: collection 4\n\n        //}}}\n\n    //}}}\n\n//}}}\n\nint fcn(double val)\n{\n    int a = 1;\n    int b = 2;\n    {\n        double d = 1.0;\n    }\n\n\n    if(a == 1)\n    {\n        int c = 4;\n    }\n    \n    return a;\n}",
+        "offset": 122,
+        "len": 169,
+        "line": 10,
+        "col": 0
+      },
+      "header_text": " col: collection 1 ",
+      "indent": 0,
+      "children": [
+        {
+          "type": "Text",
+          "src_pos": {
+            "buffer": "\n// single fold\n//{{{ fold with comment\nHello this is some text\n//}}}\n\n// This is a \n// text node\n// here\n// nested folds\n//{{{ col: collection 1 \n\n\n    //{{{ col: collection 2\n        \n    //}}}\n\n    //{{{ col: collection 3\n\n        //{{{ col: collection 4\n\n        //}}}\n\n    //}}}\n\n//}}}\n\nint fcn(double val)\n{\n    int a = 1;\n    int b = 2;\n    {\n        double d = 1.0;\n    }\n\n\n    if(a == 1)\n    {\n        int c = 4;\n    }\n    \n    return a;\n}",
+            "offset": 147,
+            "len": 2,
+            "line": 11,
+            "col": 0
+          },
+          "is_empty": false
+        },
+        {
+          "type": "Fold",
+          "src_pos": {
+            "buffer": "\n// single fold\n//{{{ fold with comment\nHello this is some text\n//}}}\n\n// This is a \n// text node\n// here\n// nested folds\n//{{{ col: collection 1 \n\n\n    //{{{ col: collection 2\n        \n    //}}}\n\n    //{{{ col: collection 3\n\n        //{{{ col: collection 4\n\n        //}}}\n\n    //}}}\n\n//}}}\n\nint fcn(double val)\n{\n    int a = 1;\n    int b = 2;\n    {\n        double d = 1.0;\n    }\n\n\n    if(a == 1)\n    {\n        int c = 4;\n    }\n    \n    return a;\n}",
+            "offset": 149,
+            "len": 47,
+            "line": 13,
+            "col": 0
+          },
+          "header_text": " col: collection 2",
+          "indent": 0,
+          "children": [
+            {
+              "type": "Text",
+              "src_pos": {
+                "buffer": "\n// single fold\n//{{{ fold with comment\nHello this is some text\n//}}}\n\n// This is a \n// text node\n// here\n// nested folds\n//{{{ col: collection 1 \n\n\n    //{{{ col: collection 2\n        \n    //}}}\n\n    //{{{ col: collection 3\n\n        //{{{ col: collection 4\n\n        //}}}\n\n    //}}}\n\n//}}}\n\nint fcn(double val)\n{\n    int a = 1;\n    int b = 2;\n    {\n        double d = 1.0;\n    }\n\n\n    if(a == 1)\n    {\n        int c = 4;\n    }\n    \n    return a;\n}",
+                "offset": 177,
+                "len": 9,
+                "line": 14,
+                "col": 0
+              },
+              "is_empty": false
+            }
+          ]
+        },
+        {
+          "type": "Text",
+          "src_pos": {
+            "buffer": "\n// single fold\n//{{{ fold with comment\nHello this is some text\n//}}}\n\n// This is a \n// text node\n// here\n// nested folds\n//{{{ col: collection 1 \n\n\n    //{{{ col: collection 2\n        \n    //}}}\n\n    //{{{ col: collection 3\n\n        //{{{ col: collection 4\n\n        //}}}\n\n    //}}}\n\n//}}}\n\nint fcn(double val)\n{\n    int a = 1;\n    int b = 2;\n    {\n        double d = 1.0;\n    }\n\n\n    if(a == 1)\n    {\n        int c = 4;\n    }\n    \n    return a;\n}",
+            "offset": 196,
+            "len": 1,
+            "line": 16,
+            "col": 0
+          },
+          "is_empty": false
+        },
+        {
+          "type": "Fold",
+          "src_pos": {
+            "buffer": "\n// single fold\n//{{{ fold with comment\nHello this is some text\n//}}}\n\n// This is a \n// text node\n// here\n// nested folds\n//{{{ col: collection 1 \n\n\n    //{{{ col: collection 2\n        \n    //}}}\n\n    //{{{ col: collection 3\n\n        //{{{ col: collection 4\n\n        //}}}\n\n    //}}}\n\n//}}}\n\nint fcn(double val)\n{\n    int a = 1;\n    int b = 2;\n    {\n        double d = 1.0;\n    }\n\n\n    if(a == 1)\n    {\n        int c = 4;\n    }\n    \n    return a;\n}",
+            "offset": 197,
+            "len": 87,
+            "line": 17,
+            "col": 0
+          },
+          "header_text": " col: collection 3",
+          "indent": 0,
+          "children": [
+            {
+              "type": "Text",
+              "src_pos": {
+                "buffer": "\n// single fold\n//{{{ fold with comment\nHello this is some text\n//}}}\n\n// This is a \n// text node\n// here\n// nested folds\n//{{{ col: collection 1 \n\n\n    //{{{ col: collection 2\n        \n    //}}}\n\n    //{{{ col: collection 3\n\n        //{{{ col: collection 4\n\n        //}}}\n\n    //}}}\n\n//}}}\n\nint fcn(double val)\n{\n    int a = 1;\n    int b = 2;\n    {\n        double d = 1.0;\n    }\n\n\n    if(a == 1)\n    {\n        int c = 4;\n    }\n    \n    return a;\n}",
+                "offset": 225,
+                "len": 1,
+                "line": 18,
+                "col": 0
+              },
+              "is_empty": false
+            },
+            {
+              "type": "Fold",
+              "src_pos": {
+                "buffer": "\n// single fold\n//{{{ fold with comment\nHello this is some text\n//}}}\n\n// This is a \n// text node\n// here\n// nested folds\n//{{{ col: collection 1 \n\n\n    //{{{ col: collection 2\n        \n    //}}}\n\n    //{{{ col: collection 3\n\n        //{{{ col: collection 4\n\n        //}}}\n\n    //}}}\n\n//}}}\n\nint fcn(double val)\n{\n    int a = 1;\n    int b = 2;\n    {\n        double d = 1.0;\n    }\n\n\n    if(a == 1)\n    {\n        int c = 4;\n    }\n    \n    return a;\n}",
+                "offset": 226,
+                "len": 47,
+                "line": 19,
+                "col": 0
+              },
+              "header_text": " col: collection 4",
+              "indent": 0,
+              "children": [
+                {
+                  "type": "Text",
+                  "src_pos": {
+                    "buffer": "\n// single fold\n//{{{ fold with comment\nHello this is some text\n//}}}\n\n// This is a \n// text node\n// here\n// nested folds\n//{{{ col: collection 1 \n\n\n    //{{{ col: collection 2\n        \n    //}}}\n\n    //{{{ col: collection 3\n\n        //{{{ col: collection 4\n\n        //}}}\n\n    //}}}\n\n//}}}\n\nint fcn(double val)\n{\n    int a = 1;\n    int b = 2;\n    {\n        double d = 1.0;\n    }\n\n\n    if(a == 1)\n    {\n        int c = 4;\n    }\n    \n    return a;\n}",
+                    "offset": 258,
+                    "len": 1,
+                    "line": 20,
+                    "col": 0
+                  },
+                  "is_empty": false
+                }
+              ]
+            },
+            {
+              "type": "Text",
+              "src_pos": {
+                "buffer": "\n// single fold\n//{{{ fold with comment\nHello this is some text\n//}}}\n\n// This is a \n// text node\n// here\n// nested folds\n//{{{ col: collection 1 \n\n\n    //{{{ col: collection 2\n        \n    //}}}\n\n    //{{{ col: collection 3\n\n        //{{{ col: collection 4\n\n        //}}}\n\n    //}}}\n\n//}}}\n\nint fcn(double val)\n{\n    int a = 1;\n    int b = 2;\n    {\n        double d = 1.0;\n    }\n\n\n    if(a == 1)\n    {\n        int c = 4;\n    }\n    \n    return a;\n}",
+                "offset": 273,
+                "len": 1,
+                "line": 22,
+                "col": 0
+              },
+              "is_empty": false
+            }
+          ]
+        },
+        {
+          "type": "Text",
+          "src_pos": {
+            "buffer": "\n// single fold\n//{{{ fold with comment\nHello this is some text\n//}}}\n\n// This is a \n// text node\n// here\n// nested folds\n//{{{ col: collection 1 \n\n\n    //{{{ col: collection 2\n        \n    //}}}\n\n    //{{{ col: collection 3\n\n        //{{{ col: collection 4\n\n        //}}}\n\n    //}}}\n\n//}}}\n\nint fcn(double val)\n{\n    int a = 1;\n    int b = 2;\n    {\n        double d = 1.0;\n    }\n\n\n    if(a == 1)\n    {\n        int c = 4;\n    }\n    \n    return a;\n}",
+            "offset": 284,
+            "len": 1,
+            "line": 24,
+            "col": 0
+          },
+          "is_empty": false
+        }
+      ]
+    },
+    {
+      "type": "Text",
+      "src_pos": {
+        "buffer": "\n// single fold\n//{{{ fold with comment\nHello this is some text\n//}}}\n\n// This is a \n// text node\n// here\n// nested folds\n//{{{ col: collection 1 \n\n\n    //{{{ col: collection 2\n        \n    //}}}\n\n    //{{{ col: collection 3\n\n        //{{{ col: collection 4\n\n        //}}}\n\n    //}}}\n\n//}}}\n\nint fcn(double val)\n{\n    int a = 1;\n    int b = 2;\n    {\n        double d = 1.0;\n    }\n\n\n    if(a == 1)\n    {\n        int c = 4;\n    }\n    \n    return a;\n}",
+        "offset": 291,
+        "len": 157,
+        "line": 26,
+        "col": 0
+      },
+      "is_empty": false
+    }
+  ]
+}

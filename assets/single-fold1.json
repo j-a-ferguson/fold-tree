@@ -1,0 +1,25 @@
+{
+  "type": "Fold",
+  "src_pos": {
+    "buffer": "//{{{ This is a fold\n    This is some text\n//}}}",
+    "offset": 0,
+    "len": 48,
+    "line": 0,
+    "col": 0
+  },
+  "header_text": " This is a fold",
+  "indent": 0,
+  "children": [
+    {
+      "type": "Text",
+      "src_pos": {
+        "buffer": "//{{{ This is a fold\n    This is some text\n//}}}",
+        "offset": 21,
+        "len": 22,
+        "line": 1,
+        "col": 0
+      },
+      "is_empty": false
+    }
+  ]
+}

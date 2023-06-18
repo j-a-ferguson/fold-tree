@@ -1,0 +1,39 @@
+{
+  "type": "Fold",
+  "src_pos": {
+    "buffer": "//{{{ This is the outer fold\n    //{{{ This is another fold\n    This is some text\n    //}}}\n//}}}",
+    "offset": 0,
+    "len": 97,
+    "line": 0,
+    "col": 0
+  },
+  "header_text": " This is the outer fold",
+  "indent": 0,
+  "children": [
+    {
+      "type": "Fold",
+      "src_pos": {
+        "buffer": "//{{{ This is the outer fold\n    //{{{ This is another fold\n    This is some text\n    //}}}\n//}}}",
+        "offset": 29,
+        "len": 63,
+        "line": 1,
+        "col": 0
+      },
+      "header_text": " This is another fold",
+      "indent": 0,
+      "children": [
+        {
+          "type": "Text",
+          "src_pos": {
+            "buffer": "//{{{ This is the outer fold\n    //{{{ This is another fold\n    This is some text\n    //}}}\n//}}}",
+            "offset": 60,
+            "len": 22,
+            "line": 2,
+            "col": 0
+          },
+          "is_empty": false
+        }
+      ]
+    }
+  ]
+}

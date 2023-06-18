@@ -57,7 +57,11 @@ export class Parser {
             }
             else 
             {
-                throw Error(this.tok_current.errorString())
+                let error_string 
+                = 
+                `Error: Fold located at line ${fold_ast.src_pos.line} is unclosed\n
+                        ${this.tok_current.errorString()}`
+                throw Error(error_string)
             }
             return fold_ast
         }
