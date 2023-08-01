@@ -59,9 +59,8 @@ export class Parser {
             {
                 let error_string 
                 = 
-                `Error: Fold located at line ${fold_ast.src_pos.line} is unclosed\n
-                        ${this.tok_current.errorString()}`
-                throw Error(error_string)
+                `Fold located at line ${fold_ast.src_pos.line} is unclosed, ${this.tok_current.errorString()}`
+                throw new Error(error_string)
             }
             return fold_ast
         }
@@ -70,9 +69,15 @@ export class Parser {
             let text_ast = this.parseText()
             return text_ast
         }
-        else 
+        else if(this.expect(TokenType.CloseBracket))
         {
-            throw new Error(this.tok_current.errorString())
+            let error_string 
+            = 
+            `Unmatched closing bracket at line ${this.tok_current.src_pos.line}`
+            throw new Error(error_string)
+        }
+        else {
+            throw new Error(`Unknown Error, ${this.tok_current.errorString()}`)
         }
     }
 
