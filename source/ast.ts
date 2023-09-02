@@ -18,7 +18,45 @@ export class BaseAst {
 export class FileAst extends BaseAst {
     readonly type: ASTType = ASTType.File
     children: Array<FoldAst | TextAst> = []
-} 
+
+    /**
+     * Traverses the AST to find the node which contains a given 
+     * line.
+     * 
+     * @param line Line number for which we want the AST node
+     * @returns The AST node which contains the givin line
+     */
+    nodeAtLine(line: number): AnyAst | undefined 
+    {
+        let out: AnyAst | undefined = undefined
+        if(line >= 0) 
+        {
+            // we are going to perform a standard BFS on the tree
+            let ast_stack: Array<AnyAst> = []
+            ast_stack.push(...this.children)
+            while(ast_stack.length != 0)
+            {
+                let cur = ast_stack.pop()
+                if(cur)
+                {
+                    if(line >= cur.src_pos.line)
+                    {
+                        out = cur
+                        break
+                    }
+
+                    if(cur instanceof FileAst)
+                    {
+                        ast_stack.push(... cur.children)
+                    }
+                }
+
+            }
+        }
+
+        return out
+    } 
+}
 
 export class FoldAst extends BaseAst {
 
@@ -50,4 +88,4 @@ export class TextAst extends BaseAst {
     is_empty: boolean = false
 }
 
-export type AnyAst = FileAst | FoldAst | TextAst
+export type AnyAst = FoldAst | TextAst

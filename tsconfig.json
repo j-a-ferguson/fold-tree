@@ -9,6 +9,7 @@
     },    
     "include": ["source/lexer.ts", 
                 "source/ast.ts",
+                "source/ast.test.ts",
                 "source/utils.ts",
                 "source/parser.ts",
                 "source/parser.test.ts",

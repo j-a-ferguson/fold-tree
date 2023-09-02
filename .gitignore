@@ -1,6 +1,7 @@
 *.js
 *.js.map
 .DS_store
+source/main.ts
 node_modules/
 build/
 archive/

@@ -1,6 +1,5 @@
-import { BaseAst, FileAst, FoldAst, TextAst, AnyAst } from "./ast"
+import { FileAst, FoldAst, TextAst } from "./ast"
 import { Lexer, TokenType, Token } from './lexer'
-import { SourcePos } from "./utils"
 
 export class Parser {
 
