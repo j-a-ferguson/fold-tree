@@ -15,3 +15,10 @@ export class SourcePos {
         return this.offset + this.len
     }
 }
+
+
+
+export function numLines(text: string): number {
+    let matches = text.match(/n/g)
+    return matches ? matches.length + 1 : 1
+}
