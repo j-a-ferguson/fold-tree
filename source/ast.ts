@@ -1,22 +1,32 @@
 import { SourcePos } from "./utils"
 import { Token, TokenType, OPEN_FOLD_MARKER } from "./lexer"
 
-export enum ASTType {
-    Base = "Base",
-    File = "File",
-    Fold = "Fold",
-    Text = "Text"
-}
 
+/**
+ * The common base class for all AST nodes in the language. This 
+ * only contains one thing: the position of the node in source, which 
+ * is a common attribute for all AST nodes.
+ */
 export class BaseAst {
-    readonly type: ASTType = ASTType.Base
-    src_pos: SourcePos = new SourcePos("", 0, 0, 0, 0)
 
-
+    /**
+     * Position of the AST node in the file.
+     */
+    src_pos: SourcePos = new SourcePos([], 0 , 0)
 }
 
+/**
+ * This is AST node representing an entire file. It is always the 
+ * root node and any AST may only have one of these. It cannot be a 
+ * leaf node, therefore it must have at least one child.
+ */
 export class FileAst extends BaseAst {
-    readonly type: ASTType = ASTType.File
+
+    /**
+     * Children of the AST node. These must be stored in the same 
+     * order in which they appear in the file. In other words nodes 
+     * must be in ascending order w.r.t ``src_pos.line``
+     */
     children: Array<FoldAst | TextAst> = []
 
     /**
@@ -29,7 +39,7 @@ export class FileAst extends BaseAst {
     nodeAtLine(line: number): AnyAst | undefined {
         let out: AnyAst | undefined = undefined
         if (line >= 0) {
-            // we are going to perform a standard BFS on the tree
+            // we are going to perform a standard DFS on the tree
             let ast_stack: Array<AnyAst> = []
             ast_stack.push(...this.children)
             while (ast_stack.length != 0) {
@@ -51,6 +61,7 @@ export class FileAst extends BaseAst {
         return out
     }
 
+
     insertFold(line: number, text: string): void {
         
         let ast_node = this.nodeAtLine(line)
@@ -68,11 +79,22 @@ export class FileAst extends BaseAst {
     }
 }
 
+/**
+ * This node represents a fold in the file. It may be a leaf node 
+ * and may have 0 or more children.
+ */
 export class FoldAst extends BaseAst {
 
-    readonly type: ASTType = ASTType.Fold
+    /**
+     * This is the text which appears just after the OPEN_BRACKET token.
+     * For example the fold:
+     * ``` c
+     * //{{{ this is some text
+     * //}}}
+     * ```
+     * will have the header text `` this is some text``
+     */
     header_text: string = ""
-
     indent: number = 0
     children: Array<FoldAst | TextAst> = []
 
@@ -80,7 +102,7 @@ export class FoldAst extends BaseAst {
 
         if (open_fold_token.isOfType(TokenType.OpenBracket)) {
 
-            let token_string = open_fold_token.src_pos.text()
+            let token_string = open_fold_token.src_pos.text
             let idx = token_string.indexOf(OPEN_FOLD_MARKER)
             this.header_text = token_string.substring(idx + OPEN_FOLD_MARKER.length, token_string.length - 1)
         }
@@ -94,7 +116,6 @@ export class FoldAst extends BaseAst {
 
 export class TextAst extends BaseAst {
 
-    readonly type: ASTType = ASTType.Text
     is_empty: boolean = false
 }
 

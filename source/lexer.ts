@@ -37,12 +37,12 @@ export class Lexer {
     private open_bracket_regex: string = ""
     private close_bracket_regex: string = ""
 
-    private buffer: string = ""
+    private buffer: Array<string> = []
 
     private tokens: Array<Token> = []
     private cur_tok_idx: number = 0
 
-    constructor(lang: string, buffer: string) {
+    constructor(lang: string, buffer: Array<string>) {
         let comment = COMMENTS[lang]
         this.open_bracket_regex = `^\\s*${comment}${OPEN_FOLD_MARKER}.*$`
         this.close_bracket_regex = `^\\s*${comment}${CLOSE_FOLD_MARKER}$`
@@ -71,16 +71,15 @@ export class Lexer {
         let ob_regex = new RegExp(this.open_bracket_regex)
         let cb_regex = new RegExp(this.close_bracket_regex)
 
-        let lines = this.buffer.split('\n')
 
         let buffer_ptr = 0
 
-        for (const [idx, line] of lines.entries()) {
+        for (const [idx, line] of this.buffer.entries()) {
             
             let line_len = line.length + 1
-            if(idx == (lines.length-1)) --line_len
+            if(idx == (this.buffer.length-1)) --line_len
 
-            let src_pos = new SourcePos(this.buffer, buffer_ptr, line_len, idx, 0)
+            let src_pos = new SourcePos(this.buffer, idx, line_len)
 
             let match1 = ob_regex.test(line)
             let match2 = cb_regex.test(line)
@@ -100,12 +99,9 @@ export class Lexer {
                 let new_token = new Token(TokenType.Textline, src_pos)
                 this.tokens.push(new_token)
             }
-
-            // the plus one is for the newline character
-            buffer_ptr += line_len
         }
 
-        let src_pos = new SourcePos(this.buffer, buffer_ptr, 0, lines.length, 0)
+        let src_pos = new SourcePos(this.buffer, this.buffer.length, 0)
         this.tokens.push(new Token(TokenType.EOI, src_pos))
     }
 }

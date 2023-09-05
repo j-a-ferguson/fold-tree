@@ -1,5 +1,6 @@
 
 import * as fs from 'fs'
+import {readFile} from './utils'
 import * as parser from './parser'
 import * as ast from './ast'
 
@@ -8,7 +9,7 @@ describe("Tests for querying the ast node at a given line", () => {
 
     test("nodeAtLine0", () => {
 
-        let text: string = fs.readFileSync('assets/file2.c', 'utf-8')
+        let text = readFile('assets/file2.c')
         let par = new parser.Parser('c', text)
         let ast_root: ast.FileAst = par.parseFile()
 
@@ -31,7 +32,7 @@ describe("Tests for querying the ast node at a given line", () => {
 
 
     test("nodeAtLine10", () => {
-        let text: string = fs.readFileSync('assets/file2.c', 'utf-8')
+        let text = readFile('assets/file2.c')
         let par = new parser.Parser('c', text)
         let ast_root: ast.FileAst = par.parseFile()
         let ast_node = ast_root.nodeAtLine(10)

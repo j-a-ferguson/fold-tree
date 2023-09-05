@@ -3,11 +3,11 @@ import { Lexer, TokenType, Token } from './lexer'
 
 export class Parser {
 
-    private buffer: string
+    private buffer: Array<string>
     private lex: Lexer
     private tok_current: Token
 
-    constructor(lang: string, buffer: string) {
+    constructor(lang: string, buffer: Array<string>) {
         this.buffer = buffer
         this.lex = new Lexer(lang, buffer)
         this.tok_current = this.lex.next()
@@ -47,8 +47,7 @@ export class Parser {
 
             if(this.expect(TokenType.CloseBracket))
             {
-                let end = this.tok_current.src_pos.end
-                let len = end - fold_ast.src_pos.offset
+                let len = fold_ast.src_pos.len
                 fold_ast.src_pos.len = len
 
                 this.advance()

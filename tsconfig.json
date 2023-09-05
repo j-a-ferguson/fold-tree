@@ -12,10 +12,10 @@
                 "source/ast.test.ts",
                 "source/utils.ts",
                 "source/parser.ts",
-                "source/parser.test.ts",
-                "source/main.ts"],
+                "source/parser.test.ts"],
     "typedocOptions": {
         "entryPoints": [
+            "source/utils.ts",
             "source/lexer.ts", 
             "source/utils.ts",
             "source/ast.ts"
