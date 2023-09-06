@@ -1,0 +1,35 @@
+[
+    {
+        "type": "OpenBracket",
+        "src_pos": {
+            "buffer": [
+                "//{{{\n",
+                "//}}}"
+            ],
+            "line": 0,
+            "len": 1
+        }
+    },
+    {
+        "type": "CloseBracket",
+        "src_pos": {
+            "buffer": [
+                "//{{{\n",
+                "//}}}"
+            ],
+            "line": 1,
+            "len": 1
+        }
+    },
+    {
+        "type": "EOI",
+        "src_pos": {
+            "buffer": [
+                "//{{{\n",
+                "//}}}"
+            ],
+            "line": 2,
+            "len": 0
+        }
+    }
+]

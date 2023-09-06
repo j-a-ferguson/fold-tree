@@ -1,0 +1,50 @@
+[
+    {
+        "type": "OpenBracket",
+        "src_pos": {
+            "buffer": [
+                "//{{{ This is a fold\n",
+                "    This is some text\n",
+                "//}}}"
+            ],
+            "line": 0,
+            "len": 1
+        }
+    },
+    {
+        "type": "Textline",
+        "src_pos": {
+            "buffer": [
+                "//{{{ This is a fold\n",
+                "    This is some text\n",
+                "//}}}"
+            ],
+            "line": 1,
+            "len": 1
+        }
+    },
+    {
+        "type": "CloseBracket",
+        "src_pos": {
+            "buffer": [
+                "//{{{ This is a fold\n",
+                "    This is some text\n",
+                "//}}}"
+            ],
+            "line": 2,
+            "len": 1
+        }
+    },
+    {
+        "type": "EOI",
+        "src_pos": {
+            "buffer": [
+                "//{{{ This is a fold\n",
+                "    This is some text\n",
+                "//}}}"
+            ],
+            "line": 3,
+            "len": 0
+        }
+    }
+]

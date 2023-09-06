@@ -1,0 +1,22 @@
+[
+    {
+        "type": "Textline",
+        "src_pos": {
+            "buffer": [
+                "// This is a single line of text, not newline"
+            ],
+            "line": 0,
+            "len": 1
+        }
+    },
+    {
+        "type": "EOI",
+        "src_pos": {
+            "buffer": [
+                "// This is a single line of text, not newline"
+            ],
+            "line": 1,
+            "len": 0
+        }
+    }
+]

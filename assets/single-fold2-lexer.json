@@ -1,0 +1,67 @@
+[
+    {
+        "type": "OpenBracket",
+        "src_pos": {
+            "buffer": [
+                "//{{{ this is another fold\n",
+                "    This is the first textline\n",
+                "    this is the second textline\n",
+                "//}}}"
+            ],
+            "line": 0,
+            "len": 1
+        }
+    },
+    {
+        "type": "Textline",
+        "src_pos": {
+            "buffer": [
+                "//{{{ this is another fold\n",
+                "    This is the first textline\n",
+                "    this is the second textline\n",
+                "//}}}"
+            ],
+            "line": 1,
+            "len": 1
+        }
+    },
+    {
+        "type": "Textline",
+        "src_pos": {
+            "buffer": [
+                "//{{{ this is another fold\n",
+                "    This is the first textline\n",
+                "    this is the second textline\n",
+                "//}}}"
+            ],
+            "line": 2,
+            "len": 1
+        }
+    },
+    {
+        "type": "CloseBracket",
+        "src_pos": {
+            "buffer": [
+                "//{{{ this is another fold\n",
+                "    This is the first textline\n",
+                "    this is the second textline\n",
+                "//}}}"
+            ],
+            "line": 3,
+            "len": 1
+        }
+    },
+    {
+        "type": "EOI",
+        "src_pos": {
+            "buffer": [
+                "//{{{ this is another fold\n",
+                "    This is the first textline\n",
+                "    this is the second textline\n",
+                "//}}}"
+            ],
+            "line": 4,
+            "len": 0
+        }
+    }
+]

@@ -44,8 +44,8 @@ export class Lexer {
 
     constructor(lang: string, buffer: Array<string>) {
         let comment = COMMENTS[lang]
-        this.open_bracket_regex = `^\\s*${comment}${OPEN_FOLD_MARKER}.*$`
-        this.close_bracket_regex = `^\\s*${comment}${CLOSE_FOLD_MARKER}$`
+        this.open_bracket_regex = `^\\s*${comment}${OPEN_FOLD_MARKER}.*\n?$`
+        this.close_bracket_regex = `^\\s*${comment}${CLOSE_FOLD_MARKER}\n?$`
         this.buffer = buffer
         this.performLexing()
     }
@@ -75,11 +75,7 @@ export class Lexer {
         let buffer_ptr = 0
 
         for (const [idx, line] of this.buffer.entries()) {
-            
-            let line_len = line.length + 1
-            if(idx == (this.buffer.length-1)) --line_len
-
-            let src_pos = new SourcePos(this.buffer, idx, line_len)
+            let src_pos = new SourcePos(this.buffer, idx, 1)
 
             let match1 = ob_regex.test(line)
             let match2 = cb_regex.test(line)

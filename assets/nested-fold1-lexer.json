@@ -1,0 +1,86 @@
+[
+    {
+        "type": "OpenBracket",
+        "src_pos": {
+            "buffer": [
+                "//{{{ This is the outer fold\n",
+                "    //{{{ This is another fold\n",
+                "    This is some text\n",
+                "    //}}}\n",
+                "//}}}"
+            ],
+            "line": 0,
+            "len": 1
+        }
+    },
+    {
+        "type": "OpenBracket",
+        "src_pos": {
+            "buffer": [
+                "//{{{ This is the outer fold\n",
+                "    //{{{ This is another fold\n",
+                "    This is some text\n",
+                "    //}}}\n",
+                "//}}}"
+            ],
+            "line": 1,
+            "len": 1
+        }
+    },
+    {
+        "type": "Textline",
+        "src_pos": {
+            "buffer": [
+                "//{{{ This is the outer fold\n",
+                "    //{{{ This is another fold\n",
+                "    This is some text\n",
+                "    //}}}\n",
+                "//}}}"
+            ],
+            "line": 2,
+            "len": 1
+        }
+    },
+    {
+        "type": "CloseBracket",
+        "src_pos": {
+            "buffer": [
+                "//{{{ This is the outer fold\n",
+                "    //{{{ This is another fold\n",
+                "    This is some text\n",
+                "    //}}}\n",
+                "//}}}"
+            ],
+            "line": 3,
+            "len": 1
+        }
+    },
+    {
+        "type": "CloseBracket",
+        "src_pos": {
+            "buffer": [
+                "//{{{ This is the outer fold\n",
+                "    //{{{ This is another fold\n",
+                "    This is some text\n",
+                "    //}}}\n",
+                "//}}}"
+            ],
+            "line": 4,
+            "len": 1
+        }
+    },
+    {
+        "type": "EOI",
+        "src_pos": {
+            "buffer": [
+                "//{{{ This is the outer fold\n",
+                "    //{{{ This is another fold\n",
+                "    This is some text\n",
+                "    //}}}\n",
+                "//}}}"
+            ],
+            "line": 5,
+            "len": 0
+        }
+    }
+]

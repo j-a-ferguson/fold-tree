@@ -5,6 +5,7 @@
   "main": "main.js",
   "scripts": {
     "compile": "tsc -p ./",
+    "clean": "tsc --build --clean",
     "lint": "eslint src --ext ts",
     "test": "jest",
     "doc": "typedoc", 

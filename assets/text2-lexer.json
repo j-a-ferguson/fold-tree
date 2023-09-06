@@ -1,0 +1,35 @@
+[
+    {
+        "type": "Textline",
+        "src_pos": {
+            "buffer": [
+                "This is another textline file, but this one has a trailing newline\n",
+                ""
+            ],
+            "line": 0,
+            "len": 1
+        }
+    },
+    {
+        "type": "Textline",
+        "src_pos": {
+            "buffer": [
+                "This is another textline file, but this one has a trailing newline\n",
+                ""
+            ],
+            "line": 1,
+            "len": 1
+        }
+    },
+    {
+        "type": "EOI",
+        "src_pos": {
+            "buffer": [
+                "This is another textline file, but this one has a trailing newline\n",
+                ""
+            ],
+            "line": 2,
+            "len": 0
+        }
+    }
+]

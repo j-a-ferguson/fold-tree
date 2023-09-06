@@ -1,0 +1,130 @@
+[
+    {
+        "type": "OpenBracket",
+        "src_pos": {
+            "buffer": [
+                "//{{{ This is the first fold\n",
+                "With some text\n",
+                "//}}}\n",
+                "//{{{ This is the second fold\n",
+                "With some text\n",
+                "//}}}\n",
+                "And this is some text"
+            ],
+            "line": 0,
+            "len": 1
+        }
+    },
+    {
+        "type": "Textline",
+        "src_pos": {
+            "buffer": [
+                "//{{{ This is the first fold\n",
+                "With some text\n",
+                "//}}}\n",
+                "//{{{ This is the second fold\n",
+                "With some text\n",
+                "//}}}\n",
+                "And this is some text"
+            ],
+            "line": 1,
+            "len": 1
+        }
+    },
+    {
+        "type": "CloseBracket",
+        "src_pos": {
+            "buffer": [
+                "//{{{ This is the first fold\n",
+                "With some text\n",
+                "//}}}\n",
+                "//{{{ This is the second fold\n",
+                "With some text\n",
+                "//}}}\n",
+                "And this is some text"
+            ],
+            "line": 2,
+            "len": 1
+        }
+    },
+    {
+        "type": "OpenBracket",
+        "src_pos": {
+            "buffer": [
+                "//{{{ This is the first fold\n",
+                "With some text\n",
+                "//}}}\n",
+                "//{{{ This is the second fold\n",
+                "With some text\n",
+                "//}}}\n",
+                "And this is some text"
+            ],
+            "line": 3,
+            "len": 1
+        }
+    },
+    {
+        "type": "Textline",
+        "src_pos": {
+            "buffer": [
+                "//{{{ This is the first fold\n",
+                "With some text\n",
+                "//}}}\n",
+                "//{{{ This is the second fold\n",
+                "With some text\n",
+                "//}}}\n",
+                "And this is some text"
+            ],
+            "line": 4,
+            "len": 1
+        }
+    },
+    {
+        "type": "CloseBracket",
+        "src_pos": {
+            "buffer": [
+                "//{{{ This is the first fold\n",
+                "With some text\n",
+                "//}}}\n",
+                "//{{{ This is the second fold\n",
+                "With some text\n",
+                "//}}}\n",
+                "And this is some text"
+            ],
+            "line": 5,
+            "len": 1
+        }
+    },
+    {
+        "type": "Textline",
+        "src_pos": {
+            "buffer": [
+                "//{{{ This is the first fold\n",
+                "With some text\n",
+                "//}}}\n",
+                "//{{{ This is the second fold\n",
+                "With some text\n",
+                "//}}}\n",
+                "And this is some text"
+            ],
+            "line": 6,
+            "len": 1
+        }
+    },
+    {
+        "type": "EOI",
+        "src_pos": {
+            "buffer": [
+                "//{{{ This is the first fold\n",
+                "With some text\n",
+                "//}}}\n",
+                "//{{{ This is the second fold\n",
+                "With some text\n",
+                "//}}}\n",
+                "And this is some text"
+            ],
+            "line": 7,
+            "len": 0
+        }
+    }
+]

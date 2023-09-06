@@ -8,11 +8,12 @@
         "rootDir": "source"        
     },    
     "include": ["source/lexer.ts", 
+                "source/lexer.test.ts",
                 "source/ast.ts",
-                "source/ast.test.ts",
+                // "source/ast.test.ts",
                 "source/utils.ts",
-                "source/parser.ts",
-                "source/parser.test.ts"],
+                "source/parser.ts"],
+                // "source/parser.test.ts"],
     "typedocOptions": {
         "entryPoints": [
             "source/utils.ts",

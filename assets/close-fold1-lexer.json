@@ -1,0 +1,22 @@
+[
+    {
+        "type": "CloseBracket",
+        "src_pos": {
+            "buffer": [
+                "//}}}"
+            ],
+            "line": 0,
+            "len": 1
+        }
+    },
+    {
+        "type": "EOI",
+        "src_pos": {
+            "buffer": [
+                "//}}}"
+            ],
+            "line": 1,
+            "len": 0
+        }
+    }
+]
