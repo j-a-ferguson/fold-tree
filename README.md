@@ -97,6 +97,7 @@ Therefore, the set of non-terminals is denoted: $S_{NT} =  \set{A^{'}, A, B,C}$.
 | ``epsilon``        |  $\epsilon$ |
 
 and denote the set of terminals as $S_{T} = \set{\mathbf{ob}, \mathbf{cb}, \mathbf{te}}$. The mathematical form of the grammar is therefore given by:
+
 $$\begin{align}
 	A & \rightarrow A^{'} \;\$ & (P_{1}) \\
 	A^{'} & \rightarrow B \; A^{'} & (P_{2}) \\
