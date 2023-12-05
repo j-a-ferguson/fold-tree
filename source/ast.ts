@@ -77,6 +77,15 @@ export class FileAst extends BaseAst {
             } 
         }
     }
+
+
+    // toJSON(): object {
+    //     return {
+    //         src_pos: this.src_pos, 
+    //         children: this.children,
+    //         type: "FILE"
+    //     }
+    // }
 }
 
 /**
@@ -112,11 +121,27 @@ export class FoldAst extends BaseAst {
     }
 
 
+    // toJSON(): object {
+    //     return {
+    //         src_pos: this.src_pos, 
+    //         header_text: this.header_text,
+    //         indent: this.indent, 
+    //         children: this.children,
+    //         type: "FOLD"
+    //     }
+    // }
 }
 
 export class TextAst extends BaseAst {
 
     is_empty: boolean = false
+
+    // toJSON(): object {
+    //     return {
+    //         src_pos: this.src_pos, 
+    //         is_empty: this.is_empty
+    //     }
+    // }
 }
 
 export type AnyAst = FoldAst | TextAst

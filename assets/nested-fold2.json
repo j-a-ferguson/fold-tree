@@ -1,0 +1,152 @@
+{
+  "src_pos": {
+    "buffer": [
+      "//{{{ This is the outer fold\n",
+      "    //{{{ This is another fold\n",
+      "    This is some text\n",
+      "    //}}}\n",
+      "    //{{{ And another\n",
+      "    This is some text\n",
+      "    //}}}\n",
+      "    //{{{ And another\n",
+      "    This is some text\n",
+      "    //}}}\n",
+      "//}}}"
+    ],
+    "line": 0,
+    "len": 1
+  },
+  "header_text": " This is the outer fold",
+  "indent": 0,
+  "children": [
+    {
+      "src_pos": {
+        "buffer": [
+          "//{{{ This is the outer fold\n",
+          "    //{{{ This is another fold\n",
+          "    This is some text\n",
+          "    //}}}\n",
+          "    //{{{ And another\n",
+          "    This is some text\n",
+          "    //}}}\n",
+          "    //{{{ And another\n",
+          "    This is some text\n",
+          "    //}}}\n",
+          "//}}}"
+        ],
+        "line": 1,
+        "len": 1
+      },
+      "header_text": " This is another fold",
+      "indent": 0,
+      "children": [
+        {
+          "src_pos": {
+            "buffer": [
+              "//{{{ This is the outer fold\n",
+              "    //{{{ This is another fold\n",
+              "    This is some text\n",
+              "    //}}}\n",
+              "    //{{{ And another\n",
+              "    This is some text\n",
+              "    //}}}\n",
+              "    //{{{ And another\n",
+              "    This is some text\n",
+              "    //}}}\n",
+              "//}}}"
+            ],
+            "line": 2,
+            "len": 1
+          },
+          "is_empty": false
+        }
+      ]
+    },
+    {
+      "src_pos": {
+        "buffer": [
+          "//{{{ This is the outer fold\n",
+          "    //{{{ This is another fold\n",
+          "    This is some text\n",
+          "    //}}}\n",
+          "    //{{{ And another\n",
+          "    This is some text\n",
+          "    //}}}\n",
+          "    //{{{ And another\n",
+          "    This is some text\n",
+          "    //}}}\n",
+          "//}}}"
+        ],
+        "line": 4,
+        "len": 1
+      },
+      "header_text": " And another",
+      "indent": 0,
+      "children": [
+        {
+          "src_pos": {
+            "buffer": [
+              "//{{{ This is the outer fold\n",
+              "    //{{{ This is another fold\n",
+              "    This is some text\n",
+              "    //}}}\n",
+              "    //{{{ And another\n",
+              "    This is some text\n",
+              "    //}}}\n",
+              "    //{{{ And another\n",
+              "    This is some text\n",
+              "    //}}}\n",
+              "//}}}"
+            ],
+            "line": 5,
+            "len": 1
+          },
+          "is_empty": false
+        }
+      ]
+    },
+    {
+      "src_pos": {
+        "buffer": [
+          "//{{{ This is the outer fold\n",
+          "    //{{{ This is another fold\n",
+          "    This is some text\n",
+          "    //}}}\n",
+          "    //{{{ And another\n",
+          "    This is some text\n",
+          "    //}}}\n",
+          "    //{{{ And another\n",
+          "    This is some text\n",
+          "    //}}}\n",
+          "//}}}"
+        ],
+        "line": 7,
+        "len": 1
+      },
+      "header_text": " And another",
+      "indent": 0,
+      "children": [
+        {
+          "src_pos": {
+            "buffer": [
+              "//{{{ This is the outer fold\n",
+              "    //{{{ This is another fold\n",
+              "    This is some text\n",
+              "    //}}}\n",
+              "    //{{{ And another\n",
+              "    This is some text\n",
+              "    //}}}\n",
+              "    //{{{ And another\n",
+              "    This is some text\n",
+              "    //}}}\n",
+              "//}}}"
+            ],
+            "line": 8,
+            "len": 1
+          },
+          "is_empty": false
+        }
+      ]
+    }
+  ]
+}

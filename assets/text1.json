@@ -1,0 +1,10 @@
+{
+  "src_pos": {
+    "buffer": [
+      "// This is a single line of text, not newline"
+    ],
+    "line": 0,
+    "len": 1
+  },
+  "is_empty": false
+}

@@ -3,13 +3,15 @@
 This is a simple typescript library for parsing documents with a VIM-style
 folded-code structure. It is the back-end of a VScode extension I am writing to 
 provide VIM-style folding but also some IDE-like features to quickly navigate 
-through files with folded structure. Specifically, we would like to provide the underlying functionality to enable:
+through files with folded structure. Specifically, I would like to provide the underlying functionality to enable:
 
 - Fast query of folding ranges
 - Fast insertion of a new fold
 - Fast deletion of an existing fold
 
-To solve for these properties I took a compiler-like appreach whereby I specify a BNF grammar for what I shall call **foldlang** and will construct an abstract syntax tree representing a file. Once this has been constructed the operations above may be implemented as standard $N$-tree operations
+To solve for these properties I took a compiler-like appreach whereby I specify a BNF grammar 
+for what I shall call **foldlang** and will construct an abstract syntax tree representing a file. 
+Once this has been constructed the operations above may be implemented as standard tree operations
 
 ## The VIM Fold
 
@@ -17,7 +19,7 @@ A fold in VIM, and any text editor for that matter, is a range of lines in a tex
 hidden, or folded. They can be useful for hiding detail when it is not needed and expanding detail only
 where it is wanted.
 Folds in VIM are started with a ``{{{`` and finished with a ``}}}``. Obviously, when used in a 
-programming language they need to be prepended with a line comment token. For the moment we will use the
+programming language they need to be prepended with a line comment token. For the moment I will use the
 C-style line comment ``//``. An example of a VIM fold would be:
 ```
 //{{{
@@ -52,7 +54,9 @@ Additionally, the special cases where a file has not folds or is empty must also
 ## The Foldlang Grammar
 
 The first step in writing a parser for any language is to specify its grammar. 
-In this grammar we denote terminals in all capitals and non-terminals in lower case. and we have eschewed some of the more complex constructs (such as regex-style quantifiers such as "\*" and "+" optional groups using "|") and have laid each production out explicitly. Therefore, the grammar for the fold structure is given by:
+In this grammar I denote terminals in all capitals and non-terminals in lower case. 
+The BNF grammar for **foldlang** is:
+
 ```ebnf 
 file          ::= ffile $                                 P1
 ffile         ::= fold ffile                              P2
@@ -64,14 +68,15 @@ text          ::= TEXTLINE text                           P7
 text          ::= TEXTLINE                                P8
 text          ::= epsilon                                 P9
 ```
-Each production is labelled with a $P_{i}$. The erminals have the following regex forms:
+
+Each production is labelled with a $P_{i}$. The terminals have the following regex forms:
 ```ebnf
 OPENBRACK  ::= "^\s*//{{{.*$"
 CLOSEBRACK ::= "^\s*//}}}$"
 TEXTLINE   ::= Any line which is not one of those above
 ```
 
-Lexing, the process by which we take a text file and turn it into a stream of tokens, is greatly 
+Lexing, the process by which I take a text file and turn it into a stream of tokens, is greatly 
 simplified in **foldlang** as each token resides on its own line.
 Let's look at some examples of each of these productions to get a feel for what they mean, starting 
 with ``P9``. 

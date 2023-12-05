@@ -1,0 +1,11 @@
+{
+  "src_pos": {
+    "buffer": [
+      "This is another textline file, but this one has a trailing newline\n",
+      ""
+    ],
+    "line": 0,
+    "len": 2
+  },
+  "is_empty": false
+}

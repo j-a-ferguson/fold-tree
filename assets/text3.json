@@ -1,0 +1,17 @@
+{
+  "src_pos": {
+    "buffer": [
+      "// {{{ is jsut a textline with some tokens in the wrong order\n",
+      "// this is another textline with some gibberish lksdjfoiqhgoiandfoijnaoeirgni\n",
+      "// alkngkqnglknglkankgfn }}} {{ }\n",
+      "int a = 0 // and some c-code to check there are no clashes\n",
+      "for(int i = 0; i < 10; ++i)\n",
+      "{\n",
+      "    printf(\"i = %d\\n\", i);\n",
+      "}"
+    ],
+    "line": 0,
+    "len": 8
+  },
+  "is_empty": false
+}

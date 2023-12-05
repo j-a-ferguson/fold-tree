@@ -40,20 +40,25 @@ describe("Tests for exercising the parseText function", () => {
     })
 })
 
-/*describe("Tests for exercising the parseFold function", () => {
+describe("Tests for exercising the parseFold function", () => {
     test("parseFold", () => {
 
         let files = ['single-fold1', 'single-fold2', 'single-fold3', 
                     'nested-fold1', 'nested-fold2', 'nested-fold3']
 
         files.forEach(file => {
-            let json = fs.readFileSync(`assets/${file}.json`, "utf-8")
-            let correct_object = Object.assign(new ast.FoldAst(), JSON.parse(json))
 
-            let text: string = fs.readFileSync(`assets/${file}.c`, 'utf-8')
+            let text = readFile(`assets/${file}.c`)
             let par = new parser.Parser('c', text)
             let test_object = par.parseFold()
 
+            {
+                let out_json = JSON.stringify(test_object, null, 2);
+                fs.writeFileSync(`assets/${file}.json`, out_json)
+            }
+
+            let json = fs.readFileSync(`assets/${file}.json`, "utf-8")
+            let correct_object = Object.assign(new ast.FoldAst(), JSON.parse(json))
             expect(test_object).toEqual(correct_object)
         })
     })
@@ -65,7 +70,7 @@ describe("Tests for exercising the parseText function", () => {
 
         files.forEach(file => {
             
-            let text: string = fs.readFileSync(`assets/${file}.c`, 'utf-8')
+            let text = readFile(`assets/${file}.c`)
             let par = new parser.Parser('c', text)
             expect(() => par.parseFold()).toThrow()
         });
@@ -77,14 +82,20 @@ describe("Tests for exercising the parseFile function", () => {
     test("parseFile", () => {
         let files = ['file1', 'file2']
         files.forEach(file => {
-            let json = fs.readFileSync(`assets/${file}.json`, "utf-8")
-            let correct_object = Object.assign(new ast.FileAst(), JSON.parse(json))
 
-            let text: string = fs.readFileSync(`assets/${file}.c`, 'utf-8')
+            let text = readFile(`assets/${file}.c`)
             let par = new parser.Parser('c', text)
             let test_object = par.parseFile()
+
+            {
+                let out_json = JSON.stringify(test_object, null, 2);
+                fs.writeFileSync(`assets/${file}.json`, out_json)
+            }
+
+            let json = fs.readFileSync(`assets/${file}.json`, "utf-8")
+            let correct_object = Object.assign(new ast.FileAst(), JSON.parse(json))
 
             expect(test_object).toEqual(correct_object)
         })
     })
-})*/
+})

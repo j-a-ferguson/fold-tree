@@ -1,0 +1,29 @@
+{
+  "src_pos": {
+    "buffer": [
+      "//{{{ this is another fold\n",
+      "    This is the first textline\n",
+      "    this is the second textline\n",
+      "//}}}"
+    ],
+    "line": 0,
+    "len": 1
+  },
+  "header_text": " this is another fold",
+  "indent": 0,
+  "children": [
+    {
+      "src_pos": {
+        "buffer": [
+          "//{{{ this is another fold\n",
+          "    This is the first textline\n",
+          "    this is the second textline\n",
+          "//}}}"
+        ],
+        "line": 1,
+        "len": 2
+      },
+      "is_empty": false
+    }
+  ]
+}
