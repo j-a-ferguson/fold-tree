@@ -21,7 +21,9 @@
         "line": 1,
         "len": 1
       },
-      "is_empty": false
+      "is_empty": false,
+      "type": "TEXT"
     }
-  ]
+  ],
+  "type": "FOLD"
 }

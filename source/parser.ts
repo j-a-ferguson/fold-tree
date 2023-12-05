@@ -47,9 +47,7 @@ export class Parser {
 
             if(this.expect(TokenType.CloseBracket))
             {
-                let len = fold_ast.src_pos.len
-                fold_ast.src_pos.len = len
-
+                fold_ast.src_pos.len =  file_ast.src_pos.len + 2
                 this.advance()
                 fold_ast.children = file_ast.children
             }

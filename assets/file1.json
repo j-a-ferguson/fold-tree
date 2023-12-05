@@ -44,9 +44,11 @@
             "line": 1,
             "len": 1
           },
-          "is_empty": false
+          "is_empty": false,
+          "type": "TEXT"
         }
-      ]
+      ],
+      "type": "FOLD"
     },
     {
       "src_pos": {
@@ -79,9 +81,11 @@
             "line": 4,
             "len": 1
           },
-          "is_empty": false
+          "is_empty": false,
+          "type": "TEXT"
         }
-      ]
+      ],
+      "type": "FOLD"
     },
     {
       "src_pos": {
@@ -97,7 +101,9 @@
         "line": 6,
         "len": 1
       },
-      "is_empty": false
+      "is_empty": false,
+      "type": "TEXT"
     }
-  ]
+  ],
+  "type": "FILE"
 }

@@ -21,7 +21,6 @@ describe("Tests for exercising the parseText function", () => {
 
             let json = fs.readFileSync(`assets/${file}.json`, "utf-8")
             let correct_object = Object.assign(new ast.TextAst(), JSON.parse(json))
-
             expect(test_object).toEqual(correct_object)
         })
     })
