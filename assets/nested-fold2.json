@@ -14,7 +14,7 @@
       "//}}}"
     ],
     "line": 0,
-    "len": 1
+    "len": 11
   },
   "header_text": " This is the outer fold",
   "indent": 0,
@@ -35,7 +35,7 @@
           "//}}}"
         ],
         "line": 1,
-        "len": 1
+        "len": 3
       },
       "header_text": " This is another fold",
       "indent": 0,
@@ -58,9 +58,11 @@
             "line": 2,
             "len": 1
           },
-          "is_empty": false
+          "is_empty": false,
+          "type": "TEXT"
         }
-      ]
+      ],
+      "type": "FOLD"
     },
     {
       "src_pos": {
@@ -78,7 +80,7 @@
           "//}}}"
         ],
         "line": 4,
-        "len": 1
+        "len": 3
       },
       "header_text": " And another",
       "indent": 0,
@@ -101,9 +103,11 @@
             "line": 5,
             "len": 1
           },
-          "is_empty": false
+          "is_empty": false,
+          "type": "TEXT"
         }
-      ]
+      ],
+      "type": "FOLD"
     },
     {
       "src_pos": {
@@ -121,7 +125,7 @@
           "//}}}"
         ],
         "line": 7,
-        "len": 1
+        "len": 3
       },
       "header_text": " And another",
       "indent": 0,
@@ -144,9 +148,12 @@
             "line": 8,
             "len": 1
           },
-          "is_empty": false
+          "is_empty": false,
+          "type": "TEXT"
         }
-      ]
+      ],
+      "type": "FOLD"
     }
-  ]
+  ],
+  "type": "FOLD"
 }

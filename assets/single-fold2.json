@@ -7,7 +7,7 @@
       "//}}}"
     ],
     "line": 0,
-    "len": 1
+    "len": 4
   },
   "header_text": " this is another fold",
   "indent": 0,
@@ -23,7 +23,9 @@
         "line": 1,
         "len": 2
       },
-      "is_empty": false
+      "is_empty": false,
+      "type": "TEXT"
     }
-  ]
+  ],
+  "type": "FOLD"
 }

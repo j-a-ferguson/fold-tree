@@ -46,7 +46,7 @@
       "}"
     ],
     "line": 0,
-    "len": 26
+    "len": 43
   },
   "children": [
     {
@@ -99,7 +99,8 @@
         "line": 0,
         "len": 2
       },
-      "is_empty": false
+      "is_empty": false,
+      "type": "TEXT"
     },
     {
       "src_pos": {
@@ -149,7 +150,7 @@
           "}"
         ],
         "line": 2,
-        "len": 1
+        "len": 3
       },
       "header_text": " fold with comment",
       "indent": 0,
@@ -204,9 +205,11 @@
             "line": 3,
             "len": 1
           },
-          "is_empty": false
+          "is_empty": false,
+          "type": "TEXT"
         }
-      ]
+      ],
+      "type": "FOLD"
     },
     {
       "src_pos": {
@@ -258,7 +261,8 @@
         "line": 5,
         "len": 5
       },
-      "is_empty": false
+      "is_empty": false,
+      "type": "TEXT"
     },
     {
       "src_pos": {
@@ -308,7 +312,7 @@
           "}"
         ],
         "line": 10,
-        "len": 1
+        "len": 16
       },
       "header_text": " col: collection 1 ",
       "indent": 0,
@@ -363,7 +367,8 @@
             "line": 11,
             "len": 2
           },
-          "is_empty": false
+          "is_empty": false,
+          "type": "TEXT"
         },
         {
           "src_pos": {
@@ -413,7 +418,7 @@
               "}"
             ],
             "line": 13,
-            "len": 1
+            "len": 3
           },
           "header_text": " col: collection 2",
           "indent": 0,
@@ -468,9 +473,11 @@
                 "line": 14,
                 "len": 1
               },
-              "is_empty": false
+              "is_empty": false,
+              "type": "TEXT"
             }
-          ]
+          ],
+          "type": "FOLD"
         },
         {
           "src_pos": {
@@ -522,7 +529,8 @@
             "line": 16,
             "len": 1
           },
-          "is_empty": false
+          "is_empty": false,
+          "type": "TEXT"
         },
         {
           "src_pos": {
@@ -572,7 +580,7 @@
               "}"
             ],
             "line": 17,
-            "len": 1
+            "len": 7
           },
           "header_text": " col: collection 3",
           "indent": 0,
@@ -627,7 +635,8 @@
                 "line": 18,
                 "len": 1
               },
-              "is_empty": false
+              "is_empty": false,
+              "type": "TEXT"
             },
             {
               "src_pos": {
@@ -677,7 +686,7 @@
                   "}"
                 ],
                 "line": 19,
-                "len": 1
+                "len": 3
               },
               "header_text": " col: collection 4",
               "indent": 0,
@@ -732,9 +741,11 @@
                     "line": 20,
                     "len": 1
                   },
-                  "is_empty": false
+                  "is_empty": false,
+                  "type": "TEXT"
                 }
-              ]
+              ],
+              "type": "FOLD"
             },
             {
               "src_pos": {
@@ -786,9 +797,11 @@
                 "line": 22,
                 "len": 1
               },
-              "is_empty": false
+              "is_empty": false,
+              "type": "TEXT"
             }
-          ]
+          ],
+          "type": "FOLD"
         },
         {
           "src_pos": {
@@ -840,9 +853,11 @@
             "line": 24,
             "len": 1
           },
-          "is_empty": false
+          "is_empty": false,
+          "type": "TEXT"
         }
-      ]
+      ],
+      "type": "FOLD"
     },
     {
       "src_pos": {
@@ -894,7 +909,9 @@
         "line": 26,
         "len": 17
       },
-      "is_empty": false
+      "is_empty": false,
+      "type": "TEXT"
     }
-  ]
+  ],
+  "type": "FILE"
 }

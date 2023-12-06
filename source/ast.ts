@@ -28,6 +28,10 @@ export class FileAst extends BaseAst {
      * must be in ascending order w.r.t ``src_pos.line``
      */
     children: Array<FoldAst | TextAst> = []
+    /**
+     * Type of node, purely for debugging and testing purposes
+     */
+    type: string = "FILE"
 
     /**
      * Traverses the AST to find the node which contains a given 
@@ -77,34 +81,6 @@ export class FileAst extends BaseAst {
             } 
         }
     }
-
-
-    toJSON(): object {
-        return {
-            src_pos: this.src_pos, 
-            children: this.children,
-            type: "FILE"
-        }
-    }
-
-    static fromJSON(json: string | object): FileAst {
-        let obj = typeof json == 'string' ? JSON.parse(json) : json
-        let file_ast = new FileAst()
-        file_ast.src_pos =  obj.src_pos
-        
-        for(let child in obj.children) {
-            switch (child.type)
-            {
-                case
-            }
-            file_ast.children.push()
-        }
-        return Object.assign(new FileAst(), {
-            src_pos: obj.src_pos, 
-            children: obj.children, 
-
-        }) 
-    }
 }
 
 /**
@@ -123,8 +99,18 @@ export class FoldAst extends BaseAst {
      * will have the header text `` this is some text``
      */
     header_text: string = ""
+    /**
+     * Indent of the fold
+     */
     indent: number = 0
+    /**
+     * Children of fold
+     */
     children: Array<FoldAst | TextAst> = []
+    /**
+     * Type of node, purely for debugging and testing purposes
+     */
+    type: string = "FOLD"
 
     setHeaderText(open_fold_token: Token) {
 
@@ -140,39 +126,15 @@ export class FoldAst extends BaseAst {
     }
 
 
-    toJSON(): object {
-        return {
-            src_pos: this.src_pos, 
-            header_text: this.header_text,
-            indent: this.indent, 
-            children: this.children,
-            type: "FOLD"
-        }
-    }
-
-
-    static fromJSON(json: string | object): FileAst
-    {
-        return new FileAst();
-    }
 }
 
 export class TextAst extends BaseAst {
 
     is_empty: boolean = false
-
-    toJSON(): object {
-        return {
-            src_pos: this.src_pos, 
-            is_empty: this.is_empty,
-            type: "TEXT"
-        }
-    }
-
-    static fromJSON(json: string | object): TextAst
-    {
-        return new TextAst();
-    }
+    /**
+     * Type of node, purely for debugging and testing purposes
+     */
+    type: string = "TEXT"
 }
 
 export type AnyAst = FoldAst | TextAst

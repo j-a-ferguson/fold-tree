@@ -13,5 +13,6 @@
     "line": 0,
     "len": 8
   },
-  "is_empty": false
+  "is_empty": false,
+  "type": "TEXT"
 }

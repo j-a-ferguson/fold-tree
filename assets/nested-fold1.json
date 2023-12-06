@@ -8,7 +8,7 @@
       "//}}}"
     ],
     "line": 0,
-    "len": 1
+    "len": 5
   },
   "header_text": " This is the outer fold",
   "indent": 0,
@@ -23,7 +23,7 @@
           "//}}}"
         ],
         "line": 1,
-        "len": 1
+        "len": 3
       },
       "header_text": " This is another fold",
       "indent": 0,
@@ -40,9 +40,12 @@
             "line": 2,
             "len": 1
           },
-          "is_empty": false
+          "is_empty": false,
+          "type": "TEXT"
         }
-      ]
+      ],
+      "type": "FOLD"
     }
-  ]
+  ],
+  "type": "FOLD"
 }
