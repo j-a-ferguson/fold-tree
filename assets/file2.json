@@ -421,7 +421,7 @@
             "len": 3
           },
           "header_text": " col: collection 2",
-          "indent": 0,
+          "indent": 4,
           "children": [
             {
               "src_pos": {
@@ -583,7 +583,7 @@
             "len": 7
           },
           "header_text": " col: collection 3",
-          "indent": 0,
+          "indent": 4,
           "children": [
             {
               "src_pos": {
@@ -689,7 +689,7 @@
                 "len": 3
               },
               "header_text": " col: collection 4",
-              "indent": 0,
+              "indent": 8,
               "children": [
                 {
                   "src_pos": {

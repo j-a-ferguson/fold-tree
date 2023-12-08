@@ -1,5 +1,11 @@
 import {readFileSync} from 'fs'
 
+
+export function assert(condition: boolean, message: string)
+{
+    if(!condition) throw new Error(message)
+}
+
 /**
  * This utility class represents a subview of a set of textlines.
  */
@@ -21,6 +27,10 @@ export class SourcePos {
         this.len = len
     }
 
+    get end(): number {
+        return this.line + this.len -1
+    }
+
     get text(): string {
 
         let out_text = ""
@@ -30,6 +40,26 @@ export class SourcePos {
             }
         }
         return out_text
+    }
+
+    addText(line: number, text: string): number {
+
+        assert(line >= this.line && line < this.line + this.len, 
+            "line out of bounds");
+
+        let text_arr = text.split('\n')
+        this.buffer.splice(line, 0, ...text_arr)
+        return text_arr.length
+    }
+
+    indent(line: number): number {
+
+        assert(line >= this.line && line < this.line + this.len, 
+            "line out of bounds");
+
+        let line_str = this.buffer[line] 
+        let match  = line_str.match(/^\s*/)
+        return match ? match[0].length : 0
     }
 }
 

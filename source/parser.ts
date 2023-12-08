@@ -3,12 +3,10 @@ import { Lexer, TokenType, Token } from './lexer'
 
 export class Parser {
 
-    private buffer: Array<string>
     private lex: Lexer
     private tok_current: Token
 
     constructor(lang: string, buffer: Array<string>) {
-        this.buffer = buffer
         this.lex = new Lexer(lang, buffer)
         this.tok_current = this.lex.next()
     }
@@ -40,6 +38,7 @@ export class Parser {
             let fold_ast = new FoldAst()
             fold_ast.src_pos = Object.assign({}, this.tok_current.src_pos)
             fold_ast.setHeaderText(this.tok_current)
+            fold_ast.indent = this.tok_current.indent()
 
             this.advance()
 

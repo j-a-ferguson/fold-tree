@@ -13,6 +13,7 @@ describe("Tests for querying the ast node at a given line", () => {
         let par = new parser.Parser('c', text)
         let ast_root: ast.FileAst = par.parseFile()
 
+
         let json = fs.readFileSync('assets/find-node-0.json', 'utf-8')
         let correct_node = Object.assign(new ast.TextAst(), JSON.parse(json))
 

@@ -1,5 +1,5 @@
 import { SourcePos } from "./utils"
-import { Token, TokenType, OPEN_FOLD_MARKER } from "./lexer"
+import { global_comment, Token, TokenType, OPEN_FOLD_MARKER, CLOSE_FOLD_MARKER } from "./lexer"
 
 
 /**
@@ -13,6 +13,8 @@ export class BaseAst {
      * Position of the AST node in the file.
      */
     src_pos: SourcePos = new SourcePos([], 0 , 0)
+
+
 }
 
 /**
@@ -42,7 +44,7 @@ export class FileAst extends BaseAst {
      */
     nodeAtLine(line: number): AnyAst | undefined {
         let out: AnyAst | undefined = undefined
-        if (line >= 0) {
+        if (line >= 0 && line < this.src_pos.buffer.length) {
             // we are going to perform a standard DFS on the tree
             let ast_stack: Array<AnyAst> = []
             ast_stack.push(...this.children)
@@ -66,18 +68,31 @@ export class FileAst extends BaseAst {
     }
 
 
-    insertFold(line: number, text: string): void {
+    insertFold(line: number, col: number, text: string): void {
         
         let ast_node = this.nodeAtLine(line)
         if (ast_node) {
 
-            let new_fold_ast = new FoldAst
-            new_fold_ast.children.push(new TextAst)
-            if( ast_node instanceof FoldAst) {
+            let whitespace = ' '.repeat(col)
+            let fold_open = `${whitespace}${global_comment}${OPEN_FOLD_MARKER}\n` 
+            let fold_close = `${whitespace}${global_comment}${CLOSE_FOLD_MARKER}\n` 
+            let fold_text = fold_open + text + fold_close
+            let fold_start = line + 1
+            let fold_len = this.src_pos.addText(line, fold_text)
+            let text_start = line + 2
+            let text_len = text.split('\n').length
 
+            let new_text_ast = new TextAst()
+            new_text_ast.src_pos = new SourcePos(this.src_pos.buffer, text_start, text_len)
+
+            let new_fold_ast = new FoldAst()
+            new_fold_ast.src_pos = new SourcePos(this.src_pos.buffer, fold_start, fold_len)
+            new_fold_ast.children.push(new_text_ast)
+            new_fold_ast.indent = col
+
+            if( ast_node instanceof FoldAst) {
             }   
             else if ( ast_node instanceof TextAst) {
-
             } 
         }
     }

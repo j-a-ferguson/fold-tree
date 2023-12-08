@@ -26,7 +26,7 @@
         "len": 3
       },
       "header_text": " This is another fold",
-      "indent": 0,
+      "indent": 4,
       "children": [
         {
           "src_pos": {

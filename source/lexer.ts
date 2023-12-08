@@ -4,6 +4,8 @@ const COMMENTS: Record<string, string> = { c: "//", cpp: "//", python: "#", rust
 export const OPEN_FOLD_MARKER: string = "\{\{\{"
 export const CLOSE_FOLD_MARKER: string = "\}\}\}"
 
+export let global_comment = ''
+
 export enum TokenType {
     OpenBracket = "OpenBracket", // matches open bracket regex"
     CloseBracket = "CloseBracket", // matches close bracket regex"
@@ -29,6 +31,10 @@ export class Token {
         }
         return is_of_type
     }
+
+    indent(): number {
+        return this.src_pos.indent(this.src_pos.line)
+    }
 }
 
 
@@ -44,6 +50,7 @@ export class Lexer {
 
     constructor(lang: string, buffer: Array<string>) {
         let comment = COMMENTS[lang]
+        global_comment = comment
         this.open_bracket_regex = `^\\s*${comment}${OPEN_FOLD_MARKER}.*\n?$`
         this.close_bracket_regex = `^\\s*${comment}${CLOSE_FOLD_MARKER}\n?$`
         this.buffer = buffer
