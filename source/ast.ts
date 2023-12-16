@@ -76,7 +76,9 @@ export class FileAst extends BaseAst {
             let whitespace = ' '.repeat(col)
             let fold_open = `${whitespace}${global_comment}${OPEN_FOLD_MARKER}\n` 
             let fold_close = `${whitespace}${global_comment}${CLOSE_FOLD_MARKER}\n` 
-            let fold_text = fold_open + text + fold_close
+
+            let has_newline = text[text.length-1] == '\n'
+            let fold_text = has_newline ? fold_open + text + fold_close  : fold_open + text + '\n' + fold_close
             let fold_start = line + 1
             let fold_len = this.src_pos.addText(line, fold_text)
             let text_start = line + 2
@@ -91,8 +93,22 @@ export class FileAst extends BaseAst {
             new_fold_ast.indent = col
 
             if( ast_node instanceof FoldAst) {
+                if (line == ast_node.src_pos.line)
+                {
+                    ast_node.children.unshift(new_fold_ast)
+                }
+                else if (line == ast_node.src_pos.end)
+                {
+
+                    ast_node.children.push(new_fold_ast)
+                }
+                else 
+                {
+                    throw new Error("Incosistency between AST and buffer")
+                }
             }   
             else if ( ast_node instanceof TextAst) {
+                
             } 
         }
     }
